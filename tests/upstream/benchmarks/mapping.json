@@ -280,21 +280,5 @@
       "scenarioCount": 27,
       "translation": "Vue fixture syntax uses a React-backed adapter; component subjects and low-level engines are the React library. Pretext VNode update counts use real React Profiler commits. Smoke reduces repetitions only; full mode keeps upstream repetitions."
     }
-  ],
-  "verification": {
-    "mode": "full",
-    "status": "passed",
-    "command": "npm run test:upstream:benchmarks",
-    "files": 6,
-    "declarations": 9,
-    "workloads": 114,
-    "originalRepetitionsVerified": true,
-    "report": "docs/upstream-benchmark-verification.json",
-    "inputsDigest": "c340d2654113dec1c418477812edc21001ebb157194fb6222b289e17a76c0c1c",
-    "vitestReportSha256": "13b82b1b579f70d40587574b6c886c127ce7045b0388129112c36d51bc1ea51e",
-    "metricsReport": {
-      "path": ".upstream-results/benchmark-metrics.json",
-      "sha256": "2ed2eb212accbcbc55c744a2220e898b3236c41e61bd05459afa2f683fdf42bb"
-    }
-  }
+  ]
 }

@@ -1,6 +1,6 @@
 import type { TextOptions } from '../src/text'
 import assert from 'node:assert/strict'
-import { test } from 'node:test'
+import { it } from 'vitest'
 import {
   clampTextToFit,
   normalizeLocationRatio,
@@ -21,7 +21,7 @@ function fitText(
   }).text
 }
 
-test('keeps complete graphemes at each ellipsis location', () => {
+it('keeps complete graphemes at each ellipsis location', () => {
   const text = 'A👨‍👩‍👧‍👦e\u0301中文Z'
   const segmenter = new Intl.Segmenter(undefined, { granularity: 'grapheme' })
   const fits = (value: string) => [...segmenter.segment(value)].length <= 4
@@ -31,7 +31,7 @@ test('keeps complete graphemes at each ellipsis location', () => {
   assert.equal(fitText(text, { location: 1 }, fits), 'A👨‍👩‍👧‍👦e\u0301…')
 })
 
-test('preserves full text, custom ellipsis, and narrow-container output', () => {
+it('preserves full text, custom ellipsis, and narrow-container output', () => {
   assert.equal(
     fitText('  short  ', {}, () => true),
     '  short  ',
@@ -54,7 +54,7 @@ test('preserves full text, custom ellipsis, and narrow-container output', () => 
   )
 })
 
-test('word boundaries keep complete words and fall back for oversized words', () => {
+it('word boundaries keep complete words and fall back for oversized words', () => {
   assert.equal(
     fitText('hello world again', { boundary: 'word' }, x => x.length <= 10),
     'hello…',

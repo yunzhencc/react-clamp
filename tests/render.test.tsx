@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict'
-import { test } from 'node:test'
 import { renderToString } from 'react-dom/server'
+import { it } from 'vitest'
 import { InlineClamp, LineClamp, WrapClamp } from '../src/index'
 
-test('server rendering preserves escaped source text and controlled expansion', () => {
+it('server rendering preserves escaped source text and controlled expansion', () => {
   const html = renderToString(
     <LineClamp
       text="<script> & hello"
@@ -23,7 +23,7 @@ test('server rendering preserves escaped source text and controlled expansion', 
   assert.ok(inline.includes('.jpeg'))
 })
 
-test('accepts upstream out-of-range locations and browser-resolved heights', () => {
+it('accepts upstream out-of-range locations and browser-resolved heights', () => {
   for (const props of [
     { maxHeight: -1 },
     { maxHeight: NaN },
@@ -38,7 +38,7 @@ test('accepts upstream out-of-range locations and browser-resolved heights', () 
   }
 })
 
-test('wrapClamp renders all items on the server and delegates invalid heights to CSS', () => {
+it('wrapClamp renders all items on the server and delegates invalid heights to CSS', () => {
   const html = renderToString(
     <WrapClamp maxLines={1}>
       <button>A & B</button>
@@ -55,7 +55,7 @@ test('wrapClamp renders all items on the server and delegates invalid heights to
   }
 })
 
-test('accepts upstream CSS lengths and configurable root tags', () => {
+it('accepts upstream CSS lengths and configurable root tags', () => {
   assert.ok(
     renderToString(
       <LineClamp text="Text" as="section" maxHeight="3em" />,
@@ -70,7 +70,7 @@ test('accepts upstream CSS lengths and configurable root tags', () => {
   )
 })
 
-test('normalizes upstream line limits and accepts a zero height', () => {
+it('normalizes upstream line limits and accepts a zero height', () => {
   assert.ok(
     !renderToString(<LineClamp text="text" maxLines={0} />).includes(
       '-webkit-line-clamp',

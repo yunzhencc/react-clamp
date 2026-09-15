@@ -11,7 +11,8 @@ export default defineConfig({
     __UPSTREAM_BENCHMARK_SMOKE__: JSON.stringify(process.env.UPSTREAM_BENCHMARK_SMOKE === '1'),
   },
   test: {
-    reporters: ['default', new UpstreamBenchmarkReporter()],
+    reporters: ['default', 'json', new UpstreamBenchmarkReporter()],
+    outputFile: { json: '.upstream-results/benchmarks.json' },
     include: ['tests/upstream/benchmarks/**/*.browser.benchmark.ts'],
     fileParallelism: false,
     // Real React commits across the unchanged large wrap matrix need more time.

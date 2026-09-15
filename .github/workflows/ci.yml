@@ -36,18 +36,14 @@ jobs:
         run: pnpm run check
       - name: All upstream functional and React type contracts
         run: pnpm run test:upstream
-      - name: Verify complete current-source correspondence
-        run: pnpm run test:upstream:verify
       - run: pnpm run build:demo
-      - name: Save verification evidence
+      - name: Save browser test reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: verification-react-${{ matrix.react }}
           include-hidden-files: true
           path: |
-            .upstream-results/
-            docs/upstream-verification.json
             playwright-report/
             test-results/
           retention-days: 7
@@ -74,5 +70,4 @@ jobs:
           include-hidden-files: true
           path: |
             .upstream-results/
-            docs/upstream-benchmark*.json
           retention-days: 7

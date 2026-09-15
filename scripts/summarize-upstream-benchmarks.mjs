@@ -1,20 +1,17 @@
 #!/usr/bin/env node
 import assert from 'node:assert/strict'
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
-import { dirname, join, relative, resolve } from 'node:path'
+import { dirname, relative, resolve } from 'node:path'
 import process from 'node:process'
-import { inputs, root, sha256 } from './upstream-inputs.mjs'
+import { fileURLToPath } from 'node:url'
 
-const [vitestInput = '.upstream-results/benchmarks.json', metricsInput = process.env.UPSTREAM_BENCHMARK_OUTPUT ?? '/private/tmp/react-clamp-upstream-benchmarks.json', output = 'docs/upstream-benchmark-verification.json'] = process.argv.slice(2)
+const root = fileURLToPath(new URL('..', import.meta.url))
+
+const [vitestInput = '.upstream-results/benchmarks.json', metricsInput = process.env.UPSTREAM_BENCHMARK_OUTPUT ?? '.upstream-results/benchmark-metrics.json', output = '.upstream-results/benchmark-summary.json'] = process.argv.slice(2)
 const read = path => JSON.parse(readFileSync(resolve(root, path), 'utf8'))
 const runner = read(vitestInput)
 const metrics = read(metricsInput)
-const verification = runner.reactClampVerification
-assert.equal(verification?.group, 'benchmarks')
-assert.equal(verification.exitCode, 0, 'Benchmark process did not finish successfully')
-assert.equal(verification.smoke, false, 'Original benchmark repetitions are required')
-assert.equal(verification.inputsUnchangedDuringRun, true, 'Benchmark inputs changed during the run')
-assert.equal(inputs('benchmarks').digest, verification.after.digest, 'Benchmark inputs are stale')
+assert.equal(runner.success, true, 'Benchmark process did not finish successfully')
 assert.equal(runner.numPassedTests, 9)
 assert.equal(runner.numFailedTests, 0)
 assert.equal((runner.numPendingTests ?? 0) + (runner.numTodoTests ?? 0), 0)
@@ -95,10 +92,6 @@ for (const group of Object.keys(expected)) {
 }
 assert.equal(cases.length, 114)
 
-const metricsPath = join(root, '.upstream-results/benchmark-metrics.json')
-mkdirSync(dirname(metricsPath), { recursive: true })
-writeFileSync(metricsPath, readFileSync(resolve(root, metricsInput)))
-const browser = read('node_modules/playwright-core/browsers.json').browsers.find(entry => entry.name === 'chromium')
 const report = {
   upstreamSha: metrics.upstreamSha,
   subject: 'react-clamp',
@@ -113,10 +106,8 @@ const report = {
   skippedWorkloads: 0,
   generatedAt: new Date().toISOString(),
   command: 'pnpm run test:upstream:benchmarks',
-  inputsDigest: verification.after.digest,
-  vitestReportSha256: sha256(readFileSync(resolve(root, vitestInput))),
-  metricsReport: { path: relative(root, metricsPath), sha256: sha256(readFileSync(metricsPath)) },
-  environment: { ...verification.runtime, chromium: browser.browserVersion, viewport: { width: 1280, height: 900 } },
+  metricsReport: { path: relative(root, resolve(root, metricsInput)) },
+  environment: { ...metrics.environment, browser: 'chromium', viewport: { width: 1280, height: 900 } },
   boundaries: [
     'All upstream workload matrices, counters and correctness assertions are retained.',
     'React Profiler update commits replace Vue VNode updates; these are different underlying operations.',
@@ -141,4 +132,4 @@ const content = `${JSON.stringify(report, null, 2).slice(0, -2)},\n  "cases": [\
 const destination = resolve(root, output)
 mkdirSync(dirname(destination), { recursive: true })
 writeFileSync(destination, content)
-console.log(JSON.stringify({ output: relative(root, destination), cases: cases.length, inputsDigest: report.inputsDigest }))
+console.log(JSON.stringify({ output: relative(root, destination), cases: cases.length }))

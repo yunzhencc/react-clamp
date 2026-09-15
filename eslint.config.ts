@@ -7,13 +7,6 @@ export default antfu(
     pnpm: true,
   },
   {
-    files: ['tests/*.test.{ts,tsx}'],
-    rules: {
-      // These suites run with node --test, independently of the Vitest suites.
-      'test/no-import-node-test': 'off',
-    },
-  },
-  {
     files: ['tests/browser/**/*.spec.ts'],
     rules: {
       // Browser regressions deliberately exercise the published build.

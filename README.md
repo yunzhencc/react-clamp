@@ -16,11 +16,10 @@ pnpm run dev
 pnpm exec playwright install chromium firefox webkit
 pnpm run check
 pnpm run test:upstream
-pnpm run test:upstream:verify
 pnpm run build:demo
 ```
 
-`pnpm lint` 检查代码，`pnpm check:package` 检查发布产物。贡献流程与版本管理见 [CONTRIBUTING.md](./CONTRIBUTING.md)。
+`pnpm lint` 检查代码，`pnpm check:package` 检查发布产物。
 
 `pnpm run build` 使用 tsdown 生成 `dist/`，包括 ESM、source map 和 TypeScript 声明；`pnpm pack` 生成本地安装包。示例站输出到 `demo-dist/`。示例与测试均运行 React 组件。
 
@@ -240,9 +239,11 @@ import { LineClamp } from 'react-clamp/pretext'
 
 `pnpm run check` 执行构建、类型、单元/SSR、React 三浏览器回归及包产物检查。
 
+`pnpm test` 直接通过 Vitest 运行基础文本和 SSR 测试。`test:upstream:*` 分组直接调用 Vitest，类型测试调用 `tsc`；不再生成源码指纹或校验对应关系报告。
+
 `pnpm run test:upstream` 保留已迁移的 React 功能与类型测试：39 个功能测试文件、536 个展开用例（111 Node + 106 引擎 + 298 组件 + 21 示例页面）。这些测试直接运行 React 组件及测量引擎，无需安装其他 UI 框架。
 
-`pnpm run test:upstream:benchmarks` 运行 React 基准的 114 项工作负载；`:benchmarks:smoke` 仅用于快速检查。测试来源映射和必要的版权声明保留在仓库中。`test:upstream:verify` 需要独立的测试清单文件，当前仓库缺少该清单，不能作为通过的验证结果。
+`pnpm run test:upstream:benchmarks` 运行 React 基准的 114 项工作负载；`:benchmarks:smoke` 仅用于快速检查。测试来源映射和必要的版权声明保留在仓库中。基准指标和统计报告输出到 `.upstream-results/`。
 
 CI 配置 React 18/19 矩阵；实际结果以 Actions 记录为准。WebKit 测试不能代替全部 Safari 或 Electron 宿主版本的集成测试。
 

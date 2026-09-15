@@ -76,7 +76,7 @@ export default class UpstreamBenchmarkReporter implements Reporter {
         }
       }
     }
-    const destination = resolve(process.env.UPSTREAM_BENCHMARK_OUTPUT ?? '/private/tmp/react-clamp-upstream-benchmarks.json')
+    const destination = resolve(process.env.UPSTREAM_BENCHMARK_OUTPUT ?? '.upstream-results/benchmark-metrics.json')
     const counts = Object.fromEntries(prefixes.map((prefix) => {
       const payload = this.payloads[prefix] as { scenarios?: unknown[], results?: unknown[], paths?: object } | unknown[] | undefined
       const count = Array.isArray(payload)
@@ -105,6 +105,7 @@ export default class UpstreamBenchmarkReporter implements Reporter {
     writeFileSync(destination, `${JSON.stringify({
       upstreamSha: '9f93dbcc31f60b02dc34fbd6a9da9bf90edc6d84',
       subject: 'react-clamp',
+      environment: { node: process.version, platform: process.platform, arch: process.arch },
       mode: process.env.UPSTREAM_BENCHMARK_SMOKE === '1' ? 'smoke' : 'full',
       status: reason,
       payloads: this.payloads,
