@@ -57,8 +57,8 @@ export function prepareLineClamp(
     : source
   const boundaries = prepareText(normalized, boundary)
   const fallbackOffsets = boundaries.fallbackBoundaryOffsets ?? boundaries.boundaryOffsets
-  const segmentGraphemeStarts = Array.from({ length: prepared.segments.length + 1 })
-  const segmentBoundaryRanks = Array.from({ length: prepared.segments.length + 1 })
+  const segmentGraphemeStarts = Array.from<number>({ length: prepared.segments.length + 1 })
+  const segmentBoundaryRanks = Array.from<number>({ length: prepared.segments.length + 1 })
   let fallbackIndex = 0
   let offset = 0
   let boundaryRank = 0

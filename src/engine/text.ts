@@ -125,7 +125,7 @@ function unitBoundaryOffsets(text: string, firstUnsafe: number): number[] | null
   if (firstUnsafe >= 0)
     return null
 
-  const offsets = Array.from({ length: text.length + 1 })
+  const offsets = Array.from<number>({ length: text.length + 1 })
   offsets[0] = 0
 
   for (let index = 0; index < text.length; index += 1) {

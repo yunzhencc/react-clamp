@@ -12,8 +12,6 @@ import type {
   RichClampResult,
   RichState,
 } from '../../../src/engine/rich'
-// @ts-expect-error Text helpers remain implementation API, not package-root exports.
-// @ts-expect-error Rich helpers remain implementation API, not package-root exports.
 
 import type {
   PreparedText,
@@ -24,11 +22,6 @@ import type {
   TextClampSpacing,
 } from '../../../src/engine/text'
 import type { ClampBoundary, ClampHandle, ClampLength, ClampLocation, ClampState, InlineClampParts, InlineClampProps, LineClampProps, RichLineClampProps, WrapClampHandle, WrapClampProps, WrapClampState } from '../../../src/index'
-// @ts-expect-error Vue slot maps are not a React public contract.
-// @ts-expect-error Shared internal prop maps are not public exports.
-// @ts-expect-error Vue emit maps are not a React public contract.
-// @ts-expect-error Vue slot maps are not a React public contract.
-// @ts-expect-error Framework-internal ref plumbing is not a public export.
 // React equivalents of upstream type-surface.ts and wrap-slot-types.vue (MIT), 9f93dbcc.
 import { createRef } from 'react'
 import {
@@ -42,6 +35,21 @@ import {
   WrapClamp,
 
 } from '../../../src/index'
+
+// @ts-expect-error Text helpers remain implementation API, not package-root exports.
+type _RootTextClampHint = import('../../../src/index').TextClampHint
+// @ts-expect-error Rich helpers remain implementation API, not package-root exports.
+type _RootRichState = import('../../../src/index').RichState
+// @ts-expect-error Vue slot maps are not a React public contract.
+type _RootClampSlotProps = import('../../../src/index').ClampSlotProps
+// @ts-expect-error Shared internal prop maps are not public exports.
+type _RootClampProps = import('../../../src/index').ClampProps
+// @ts-expect-error Vue emit maps are not a React public contract.
+type _RootClampEmits = import('../../../src/index').ClampEmits
+// @ts-expect-error Vue slot maps are not a React public contract.
+type _RootClampSlots = import('../../../src/index').ClampSlots
+// @ts-expect-error Framework-internal ref plumbing is not a public export.
+type _RootMultilineAffixRefSetter = import('../../../src/index').MultilineAffixRefSetter
 
 type Equal<Left, Right>
   = (<Value>() => Value extends Left ? 1 : 2) extends <

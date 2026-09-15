@@ -77,7 +77,7 @@ function widthSweep(start: number, end: number, step: number): number[] {
 }
 
 function repeatedWidths(widths: readonly number[], count: number): number[] {
-  return Array.from({ length: count }).fill(widths).flat()
+  return Array.from<readonly number[]>({ length: count }).fill(widths).flat()
 }
 
 function jitterWidths(count: number): number[] {

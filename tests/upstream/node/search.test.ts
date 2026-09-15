@@ -353,7 +353,7 @@ describe('search cost estimates', () => {
   })
 
   it('tightens target-rank uncertainty from local candidate advances', () => {
-    const advances = Array.from({ length: 63 }).fill(12)
+    const advances = Array.from<number>({ length: 63 }).fill(12)
 
     expect(
       estimateTargetRankLocalInterval({
@@ -450,7 +450,7 @@ describe('search cost estimates', () => {
   it('derives warm width room from layout physics instead of a fixed pixel window', () => {
     function room(advance: number, lineCapacity: number, packingSlack?: number) {
       return estimateWarmSearchWidthRoom({
-        advances: Array.from({ length: 63 }).fill(advance),
+        advances: Array.from<number>({ length: 63 }).fill(advance),
         count: 64,
         hint: 16,
         lineCapacity,
@@ -493,7 +493,7 @@ describe('search cost estimates', () => {
     })
     expect(
       estimateWarmSearchWidthRoom({
-        advances: Array.from({ length: 63 }).fill(16),
+        advances: Array.from<number>({ length: 63 }).fill(16),
         count: 64,
         direction: -1,
         hint: 16,
@@ -512,7 +512,7 @@ describe('search cost estimates', () => {
   })
 
   it('requires line-capacity evidence before widening the dynamic warm window', () => {
-    const advances = Array.from({ length: 63 }).fill(16)
+    const advances = Array.from<number>({ length: 63 }).fill(16)
     const advance = { max: 16, min: 16 }
     const count = advances.length + 1
     const previousRank = 16
@@ -574,7 +574,7 @@ describe('search cost estimates', () => {
   })
 
   it('uses total packing slack in opposite directions only with shrink line-break proof', () => {
-    const advances = Array.from({ length: 63 }).fill(16)
+    const advances = Array.from<number>({ length: 63 }).fill(16)
     const count = advances.length + 1
     const previousRank = 16
     const lineCapacity = 2
@@ -622,7 +622,7 @@ describe('search cost estimates', () => {
   })
 
   it('needs only the next rejected local advances when packing slack is known', () => {
-    const fullAdvances = Array.from({ length: 63 }).fill(16)
+    const fullAdvances = Array.from<number>({ length: 63 }).fill(16)
     const sparseGrow = Array.from<number>({ length: 63 })
     sparseGrow[16] = 16
     sparseGrow[17] = 16
@@ -737,7 +737,7 @@ describe('search cost estimates', () => {
   })
 
   it('places warm width room on the local interval decision boundary', () => {
-    const advances = Array.from({ length: 63 }).fill(16)
+    const advances = Array.from<number>({ length: 63 }).fill(16)
     const previousRank = 16
     const previousWidth = 200
     const count = 64
@@ -861,7 +861,7 @@ describe('search cost estimates', () => {
 
   it('keeps warm width room aligned with interval decisions across physical inputs', () => {
     const advanceSets = [
-      Array.from({ length: 63 }).fill(8),
+      Array.from<number>({ length: 63 }).fill(8),
       Array.from({ length: 63 }, (_, index) => (index % 3 === 0 ? 6 : index % 3 === 1 ? 12 : 20)),
       Array.from({ length: 63 }, (_, index) => 10 + (index % 5) * 3),
     ]
