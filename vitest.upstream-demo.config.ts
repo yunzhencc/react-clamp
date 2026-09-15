@@ -1,19 +1,20 @@
-import { defineConfig } from "vitest/config";
-import { playwright } from "@vitest/browser-playwright";
+import { playwright } from '@vitest/browser-playwright'
+import { defineConfig } from 'vitest/config'
+
 export default defineConfig({
-  cacheDir: "node_modules/.vite/upstream-demo",
-  publicDir: "demo/public",
+  cacheDir: 'node_modules/.vite/upstream-demo',
+  publicDir: 'demo/public',
   optimizeDeps: {
     include: [
-      "react",
-      "react-dom",
-      "react-dom/client",
-      "@chenglou/pretext",
-      "overlayscrollbars",
+      'react',
+      'react-dom',
+      'react-dom/client',
+      '@chenglou/pretext',
+      'overlayscrollbars',
     ],
   },
   test: {
-    include: ["tests/upstream/demo/**/*.browser.test.ts"],
+    include: ['tests/upstream/demo/**/*.browser.test.ts'],
     fileParallelism: false,
     testTimeout: 30_000,
     browser: {
@@ -23,7 +24,7 @@ export default defineConfig({
       ui: false,
       screenshotFailures: false,
       viewport: { width: 1280, height: 900 },
-      instances: [{ browser: "chromium" }],
+      instances: [{ browser: 'chromium' }],
     },
   },
-});
+})

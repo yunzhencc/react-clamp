@@ -1,10 +1,10 @@
-import { defineConfig } from "vitest/config";
-import { playwright } from "@vitest/browser-playwright";
+import { playwright } from '@vitest/browser-playwright'
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
-  cacheDir: "node_modules/.vite/upstream-engine",
+  cacheDir: 'node_modules/.vite/upstream-engine',
   test: {
-    include: ["tests/upstream/engine/**/*.browser.test.ts"],
+    include: ['tests/upstream/engine/**/*.browser.test.ts'],
     fileParallelism: false,
     testTimeout: 30_000,
     browser: {
@@ -14,7 +14,7 @@ export default defineConfig({
       ui: false,
       screenshotFailures: false,
       viewport: { width: 1280, height: 900 },
-      instances: [{ browser: "chromium" }, { browser: "firefox" }, { browser: "webkit" }],
+      instances: [{ browser: 'chromium' }, { browser: 'firefox' }, { browser: 'webkit' }],
     },
   },
-});
+})
