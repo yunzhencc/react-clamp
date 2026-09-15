@@ -27,7 +27,7 @@ pnpm run build:demo
 ## 多行文本
 
 ```tsx
-import { LineClamp } from "react-clamp";
+import { LineClamp } from 'react-clamp'
 
 <LineClamp
   text={description}
@@ -35,11 +35,10 @@ import { LineClamp } from "react-clamp";
   after={({ clamped, expanded, toggle }) =>
     (clamped || expanded) && (
       <button type="button" aria-expanded={expanded} onClick={toggle}>
-        {expanded ? "收起" : "展开"}
+        {expanded ? '收起' : '展开'}
       </button>
-    )
-  }
-/>;
+    )}
+/>
 ```
 
 `before` 和 `after` 可以是 React 节点，也可以是状态渲染函数。它们作为不可拆分的行内单元参与布局。正文 `text` 仅接受字符串。
@@ -64,37 +63,44 @@ import { LineClamp } from "react-clamp";
 状态渲染函数和 `ClampHandle` 提供 `clamped`、`expanded`、`expand()`、`collapse()`、`toggle()`。展开后 `clamped` 为 `false`，所以收起按钮用 `expanded || clamped` 判断。
 
 ```tsx
-import { useRef, useState } from "react";
-import { LineClamp, type ClampHandle } from "react-clamp";
+import type { ClampHandle } from 'react-clamp'
+import { useRef, useState } from 'react'
+import { LineClamp } from 'react-clamp'
 
-const [expanded, setExpanded] = useState(false);
-<LineClamp
-  text={description}
-  expanded={expanded}
-  onExpandedChange={setExpanded}
-/>;
+export function ControlledExample({ description }: { description: string }) {
+  const [expanded, setExpanded] = useState(false)
+  return (
+    <LineClamp
+      text={description}
+      expanded={expanded}
+      onExpandedChange={setExpanded}
+    />
+  )
+}
 
-const clampRef = useRef<ClampHandle>(null);
-<LineClamp ref={clampRef} text={description} />;
-// clampRef.current?.expand();
-// clampRef.current?.element 是根 DOM 元素。
+export function RefExample({ description }: { description: string }) {
+  const clampRef = useRef<ClampHandle>(null)
+  // clampRef.current?.expand()
+  // clampRef.current?.element 是根 DOM 元素。
+  return <LineClamp ref={clampRef} text={description} />
+}
 ```
 
 ## 单行与固定前后缀
 
 ```tsx
-import { InlineClamp } from "react-clamp";
+import { InlineClamp } from 'react-clamp'
 
 <InlineClamp
   text="summer-campaign-panorama-final.jpeg"
   location="middle"
   split={(text) => {
-    const dot = text.lastIndexOf(".");
+    const dot = text.lastIndexOf('.')
     return dot > 0
       ? { body: text.slice(0, dot), end: text.slice(dot) }
-      : { body: text };
+      : { body: text }
   }}
-/>;
+/>
 ```
 
 `split` 返回 `{ start?: string, body: string, end?: string }`，只截断 `body`。未传时处理整个 `text`。单行组件支持 `location`、`boundary`、`ellipsis`、`onClampChange`、根元素属性和 ref；不提供展开状态 props 或附加内容插槽。默认根元素为 `span`，宽度为可用宽度的 100%。
@@ -102,21 +108,21 @@ import { InlineClamp } from "react-clamp";
 ## 标签、头像与完整条目
 
 ```tsx
-import { WrapClamp } from "react-clamp";
+import { WrapClamp } from 'react-clamp'
 
 <WrapClamp
   maxLines={2}
   gap={8}
   more={({ hiddenCount, expanded, toggle }) => (
     <button type="button" aria-expanded={expanded} onClick={toggle}>
-      {expanded ? "收起" : `+${hiddenCount} 更多`}
+      {expanded ? '收起' : `+${hiddenCount} 更多`}
     </button>
   )}
 >
-  {tags.map((tag) => (
+  {tags.map(tag => (
     <span key={tag.id}>{tag.name}</span>
   ))}
-</WrapClamp>;
+</WrapClamp>
 ```
 
 以上为 children 便捷接口。每个直接子节点是一项，按顺序保留完整前缀；数组自动展开，Fragment 整体算一项。动态列表应提供稳定的 `key`。不截断条目内部文字，也不拆开单个标签或头像。
@@ -154,10 +160,9 @@ import { WrapClamp } from "react-clamp";
   after={({ hiddenItems, expanded, clamped, toggle }) =>
     (expanded || clamped) && (
       <button type="button" onClick={toggle} aria-expanded={expanded}>
-        {expanded ? "收起" : `+${hiddenItems.length} 更多`}
+        {expanded ? '收起' : `+${hiddenItems.length} 更多`}
       </button>
-    )
-  }
+    )}
 />
 ```
 
@@ -168,7 +173,7 @@ import { WrapClamp } from "react-clamp";
 ## 富文本
 
 ```tsx
-import { RichLineClamp } from "react-clamp";
+import { RichLineClamp } from 'react-clamp'
 
 <RichLineClamp
   html={trustedHtml}
@@ -178,11 +183,10 @@ import { RichLineClamp } from "react-clamp";
   after={({ expanded, clamped, toggle }) =>
     (expanded || clamped) && (
       <button type="button" onClick={toggle}>
-        {expanded ? "收起" : "展开"}
+        {expanded ? '收起' : '展开'}
       </button>
-    )
-  }
-/>;
+    )}
+/>
 ```
 
 `html` 必填，仅接受可信或已经清理的 HTML；组件不提供 HTML 清理。共享行数、高度、字素/单词边界、前后插槽、展开、回调与 ref；仅支持末尾省略，不提供 `location`。
@@ -194,14 +198,14 @@ import { RichLineClamp } from "react-clamp";
 ## 预测入口
 
 ```tsx
-import { LineClamp } from "react-clamp/pretext";
+import { LineClamp } from 'react-clamp/pretext'
 
 <LineClamp
   text={description}
   maxLines={2}
   boundary="word"
-  style={{ font: "16px/24px Arial, sans-serif" }}
-/>;
+  style={{ font: '16px/24px Arial, sans-serif' }}
+/>
 ```
 
 该入口保留 LineClamp API：默认 grapheme / end / 默认省略符优先原生 CSS；`word`、末尾省略、明确行数、无高度限制且省略符无强制换行时使用 Pretext；其余组合回退到浏览器测量。支持前后插槽的宽度变化。

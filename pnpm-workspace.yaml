@@ -1,9 +1,6 @@
+minimumReleaseAgeExcludePrune: true
+
 # A single library; no placeholder workspace packages or dependency catalogs.
-packages:
-  - .
-allowBuilds:
-  esbuild: true
-  simple-git-hooks: true
 minimumReleaseAgeExclude:
   - '@eslint-react/ast@5.19.1'
   - '@eslint-react/core@5.19.1'
@@ -20,3 +17,13 @@ minimumReleaseAgeExclude:
   - eslint-plugin-react-rsc@5.19.1
   - eslint-plugin-react-web-api@5.19.1
   - eslint-plugin-react-x@5.19.1
+
+trustPolicy: no-downgrade
+shellEmulator: true
+
+packages:
+  - .
+
+allowBuilds:
+  esbuild: true
+  simple-git-hooks: true

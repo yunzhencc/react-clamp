@@ -1,108 +1,115 @@
-import { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
+import type { ReactElement } from 'react'
+import type { ClampBoundary } from '../src'
+import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import {
+
   InlineClamp,
   LineClamp,
   RichLineClamp,
   WrapClamp,
-  type ClampBoundary,
-} from "../src";
-import { LineClamp as PretextLineClamp } from "../src/pretext";
-import { FpsMeter, Range, ScrollArea } from "./widgets";
-export type Surface = "line" | "rich" | "inline" | "wrap";
+} from '../src'
+import { LineClamp as PretextLineClamp } from '../src/pretext'
+import { FpsMeter, Range, ScrollArea } from './widgets'
+
+export type Surface = 'line' | 'rich' | 'inline' | 'wrap'
 export function StressPlayground({
   initialSurface,
   onClose,
   returnFocus,
 }: {
-  initialSurface: Surface;
-  onClose: () => void;
-  returnFocus: HTMLElement | null;
-}) {
-  const [surface, setSurface] = useState(initialSurface);
-  const [count, setCount] = useState(10),
-    [width, setWidth] = useState(360),
-    [payload, setPayload] = useState(3),
-    [lines, setLines] = useState(3),
-    [height, setHeight] = useState(96);
-  const [after, setAfter] = useState(false),
-    [resizing, setResizing] = useState(false);
-  const [mode, setMode] = useState<"lines" | "height">("lines");
-  const [boundary, setBoundary] = useState<ClampBoundary>("word");
-  const [engine, setEngine] = useState<"standard" | "pretext">("standard");
-  const dialog = useRef<HTMLDivElement>(null),
-    close = useRef<HTMLButtonElement>(null);
+  initialSurface: Surface
+  onClose: () => void
+  returnFocus: HTMLElement | null
+}): ReactElement {
+  const [surface, setSurface] = useState(initialSurface)
+  const [count, setCount] = useState(10)
+  const [width, setWidth] = useState(360)
+  const [payload, setPayload] = useState(3)
+  const [lines, setLines] = useState(3)
+  const [height, setHeight] = useState(96)
+  const [after, setAfter] = useState(false)
+  const [resizing, setResizing] = useState(false)
+  const [mode, setMode] = useState<'lines' | 'height'>('lines')
+  const [boundary, setBoundary] = useState<ClampBoundary>('word')
+  const [engine, setEngine] = useState<'standard' | 'pretext'>('standard')
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const closeRef = useRef<HTMLButtonElement>(null)
   useEffect(() => {
-    const bodyPosition = document.body.style.position,
-      overflow = document.documentElement.style.overflow;
-    document.body.style.position = "fixed";
-    document.documentElement.style.overflow = "hidden";
-    close.current?.focus();
-    const keydown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
-      if (event.key !== "Tab") return;
+    const bodyPosition = document.body.style.position
+    const overflow = document.documentElement.style.overflow
+    document.body.style.position = 'fixed'
+    document.documentElement.style.overflow = 'hidden'
+    closeRef.current?.focus()
+    const keydown = (event: KeyboardEvent): void => {
+      if (event.key === 'Escape')
+        onClose()
+      if (event.key !== 'Tab')
+        return
       const controls = [
-        ...dialog.current!.querySelectorAll<HTMLElement>(
-          "button,input,select,textarea,a[href]",
+        ...dialogRef.current!.querySelectorAll<HTMLElement>(
+          'button,input,select,textarea,a[href]',
         ),
-      ].filter((element) => element.getClientRects().length);
-      const first = controls[0],
-        last = controls.at(-1);
+      ].filter(element => element.getClientRects().length)
+      const first = controls[0]
+      const last = controls.at(-1)
       if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last?.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first?.focus();
+        event.preventDefault()
+        last?.focus()
       }
-    };
-    document.addEventListener("keydown", keydown);
+      else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first?.focus()
+      }
+    }
+    document.addEventListener('keydown', keydown)
     return () => {
-      document.body.style.position = bodyPosition;
-      document.documentElement.style.overflow = overflow;
-      document.removeEventListener("keydown", keydown);
-      returnFocus?.focus();
-    };
-  }, [onClose, returnFocus]);
+      document.body.style.position = bodyPosition
+      document.documentElement.style.overflow = overflow
+      document.removeEventListener('keydown', keydown)
+      returnFocus?.focus()
+    }
+  }, [onClose, returnFocus])
   useEffect(() => {
-    if (!resizing) return;
-    let id = 0;
-    const start = performance.now();
-    const tick = (now: number) => {
-      setWidth(Math.round(440 + Math.sin((now - start) / 700) * 200));
-      id = requestAnimationFrame(tick);
-    };
-    id = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(id);
-  }, [resizing]);
-  const native =
-    mode === "lines" && boundary === "grapheme" && (lines === 1 || !after);
-  const predictive =
-    engine === "pretext" && mode === "lines" && boundary === "word";
-  const activeEngine = native ? "native" : predictive ? "pretext" : "measured";
-  const Clamp = engine === "pretext" ? PretextLineClamp : LineClamp;
-  const limits = mode === "lines" ? { maxLines: lines } : { maxHeight: height };
+    if (!resizing)
+      return
+    let id = 0
+    const start = performance.now()
+    const tick = (now: number): void => {
+      setWidth(Math.round(440 + Math.sin((now - start) / 700) * 200))
+      id = requestAnimationFrame(tick)
+    }
+    id = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(id)
+  }, [resizing])
+  const native
+    = mode === 'lines' && boundary === 'grapheme' && (lines === 1 || !after)
+  const predictive
+    = engine === 'pretext' && mode === 'lines' && boundary === 'word'
+  const activeEngine = native ? 'native' : predictive ? 'pretext' : 'measured'
+  const Clamp = engine === 'pretext' ? PretextLineClamp : LineClamp
+  const limits = mode === 'lines' ? { maxLines: lines } : { maxHeight: height }
   const afterSlot = after
     ? () => <button data-stress-after-slot="">Action</button>
-    : undefined;
+    : undefined
   return createPortal(
     <div className="stress-backdrop">
       <div
-        ref={dialog}
+        ref={dialogRef}
         className="stress-dialog"
         role="dialog"
         aria-modal="true"
         aria-label="Stress playground"
         data-stress-playground=""
       >
-        <button ref={close} data-stress-close="" onClick={onClose}>
+        <button ref={closeRef} data-stress-close="" onClick={onClose}>
           Close
         </button>
         <h2>Stress playground</h2>
         <FpsMeter />
         <ScrollArea data-stress-modal-scroll="">
           <div className="stress-controls">
-            {(["line", "rich", "inline", "wrap"] as const).map((item) => (
+            {(['line', 'rich', 'inline', 'wrap'] as const).map(item => (
               <button
                 key={item}
                 data-stress-surface={item}
@@ -129,7 +136,10 @@ export function StressPlayground({
               max={720}
               onChange={setWidth}
             />
-            <output data-stress-width="">{width}px</output>
+            <output data-stress-width="">
+              {width}
+              px
+            </output>
             <Range
               name="stress-payload-slider"
               label="Payload"
@@ -138,18 +148,18 @@ export function StressPlayground({
               onChange={setPayload}
             />
             <output data-stress-payload="">
-              {surface === "wrap" ? `${payload * 8} items` : `${payload}x text`}
+              {surface === 'wrap' ? `${payload * 8} items` : `${payload}x text`}
             </output>
             <label data-stress-after-state="" data-enabled={after}>
               <input
                 data-stress-after-toggle=""
                 type="checkbox"
                 checked={after}
-                onChange={(event) => setAfter(event.currentTarget.checked)}
+                onChange={event => setAfter(event.currentTarget.checked)}
               />
               After slot
             </label>
-            {(["lines", "height"] as const).map((item) => (
+            {(['lines', 'height'] as const).map(item => (
               <button
                 key={item}
                 data-stress-limit-mode={item}
@@ -159,33 +169,38 @@ export function StressPlayground({
                 {item}
               </button>
             ))}
-            {mode === "lines" ? (
+            {mode === 'lines'
+              ? (
+                  <>
+                    <Range
+                      name="stress-max-lines-slider"
+                      label="Max lines"
+                      value={lines}
+                      max={8}
+                      onChange={setLines}
+                    />
+                    <output data-stress-max-lines="">{lines}</output>
+                  </>
+                )
+              : (
+                  <>
+                    <Range
+                      name="stress-max-height-slider"
+                      label="Max height"
+                      value={height}
+                      min={24}
+                      max={200}
+                      onChange={setHeight}
+                    />
+                    <output data-stress-max-height="">
+                      {height}
+                      px
+                    </output>
+                  </>
+                )}
+            {surface === 'line' && (
               <>
-                <Range
-                  name="stress-max-lines-slider"
-                  label="Max lines"
-                  value={lines}
-                  max={8}
-                  onChange={setLines}
-                />
-                <output data-stress-max-lines="">{lines}</output>
-              </>
-            ) : (
-              <>
-                <Range
-                  name="stress-max-height-slider"
-                  label="Max height"
-                  value={height}
-                  min={24}
-                  max={200}
-                  onChange={setHeight}
-                />
-                <output data-stress-max-height="">{height}px</output>
-              </>
-            )}
-            {surface === "line" && (
-              <>
-                {(["word", "grapheme"] as const).map((item) => (
+                {(['word', 'grapheme'] as const).map(item => (
                   <button
                     key={item}
                     data-stress-boundary={item}
@@ -195,7 +210,7 @@ export function StressPlayground({
                     {item}
                   </button>
                 ))}
-                {(["standard", "pretext"] as const).map((item) => (
+                {(['standard', 'pretext'] as const).map(item => (
                   <button
                     key={item}
                     data-stress-line-engine={item}
@@ -210,17 +225,17 @@ export function StressPlayground({
                   data-stress-engine={activeEngine}
                   title={
                     native
-                      ? `Native CSS ${lines === 1 ? "text-overflow" : "line-clamp"}`
+                      ? `Native CSS ${lines === 1 ? 'text-overflow' : 'line-clamp'}`
                       : predictive
-                        ? "Pretext prediction"
-                        : "Browser measurement"
+                        ? 'Pretext prediction'
+                        : 'Browser measurement'
                   }
                 >
-                  {activeEngine === "native"
-                    ? "Native"
-                    : activeEngine === "pretext"
-                      ? "Pretext"
-                      : "Measured"}
+                  {activeEngine === 'native'
+                    ? 'Native'
+                    : activeEngine === 'pretext'
+                      ? 'Pretext'
+                      : 'Measured'}
                 </output>
               </>
             )}
@@ -235,65 +250,71 @@ export function StressPlayground({
           <ScrollArea data-stress-workload="">
             <div className="stress-grid">
               {Array.from({ length: count }, (_, index) => {
-                const text =
-                  `Row ${index + 1} keeps customer impact, mitigation, ownership, and follow-up visible. `.repeat(
+                const text
+                  = `Row ${index + 1} keeps customer impact, mitigation, ownership, and follow-up visible. `.repeat(
                     payload,
-                  );
+                  )
                 return (
                   <div
                     key={index}
                     data-stress-item={mode}
                     data-stress-surface-item={surface}
-                    style={{ width, font: "16px/22px Arial" }}
+                    style={{ width, font: '16px/22px Arial' }}
                   >
-                    {surface === "line" ? (
-                      <Clamp
-                        className="stress-clamp"
-                        text={text}
-                        boundary={boundary}
-                        {...limits}
-                        after={afterSlot}
-                      />
-                    ) : surface === "rich" ? (
-                      <RichLineClamp
-                        className="stress-clamp"
-                        html={`<strong>Release ${index + 1}</strong> ${text}`}
-                        boundary={boundary}
-                        {...limits}
-                        after={afterSlot}
-                      />
-                    ) : surface === "inline" ? (
-                      <InlineClamp
-                        className="stress-clamp"
-                        text={text}
-                        boundary={boundary}
-                      />
-                    ) : (
-                      <WrapClamp
-                        className="stress-clamp"
-                        items={Array.from(
-                          { length: payload * 8 },
-                          (_, i) => `Item ${i + 1}`,
-                        )}
-                        renderItem={(item) => (
-                          <span className="tag">{item}</span>
-                        )}
-                        {...limits}
-                        after={
-                          after
-                            ? ({ hiddenCount }) => (
-                                <button data-stress-after-slot="">
-                                  {hiddenCount > 0
-                                    ? `+${hiddenCount}`
-                                    : "Action"}
-                                </button>
-                              )
-                            : undefined
-                        }
-                      />
-                    )}
+                    {surface === 'line'
+                      ? (
+                          <Clamp
+                            className="stress-clamp"
+                            text={text}
+                            boundary={boundary}
+                            {...limits}
+                            after={afterSlot}
+                          />
+                        )
+                      : surface === 'rich'
+                        ? (
+                            <RichLineClamp
+                              className="stress-clamp"
+                              html={`<strong>Release ${index + 1}</strong> ${text}`}
+                              boundary={boundary}
+                              {...limits}
+                              after={afterSlot}
+                            />
+                          )
+                        : surface === 'inline'
+                          ? (
+                              <InlineClamp
+                                className="stress-clamp"
+                                text={text}
+                                boundary={boundary}
+                              />
+                            )
+                          : (
+                              <WrapClamp
+                                className="stress-clamp"
+                                items={Array.from(
+                                  { length: payload * 8 },
+                                  (_, i) => `Item ${i + 1}`,
+                                )}
+                                renderItem={item => (
+                                  <span className="tag">{item}</span>
+                                )}
+                                {...limits}
+                                after={
+                                  after
+                                    ? ({ hiddenCount }) => (
+                                        <button data-stress-after-slot="">
+                                          {hiddenCount > 0
+                                            ? `+${hiddenCount}`
+                                            : 'Action'}
+                                        </button>
+                                      )
+                                    : undefined
+                                }
+                              />
+                            )}
                   </div>
-                );
+                )
               })}
             </div>
           </ScrollArea>
@@ -301,5 +322,5 @@ export function StressPlayground({
       </div>
     </div>,
     document.body,
-  );
+  )
 }

@@ -1,11 +1,11 @@
+import type { Logger, ViteDevServer } from 'vite'
 // Adapted from vue-clamp at 9f93dbcc31f60b02dc34fbd6a9da9bf90edc6d84; MIT.
-import { EventEmitter } from "node:events";
-import { describe, expect, it, vi } from "vitest";
-import { browserLogFilter } from "../../../scripts/upstream-browser-log-filter.js";
+import { EventEmitter } from 'node:events'
+import { describe, expect, it, vi } from 'vitest'
 
-import type { Logger, ViteDevServer } from "vite";
+import { browserLogFilter } from '../../../scripts/upstream-browser-log-filter.js'
 
-function createLogger(): Logger & { error: Logger["error"] } {
+function createLogger(): Logger & { error: Logger['error'] } {
   return {
     info: vi.fn(),
     warn: vi.fn(),
@@ -14,16 +14,16 @@ function createLogger(): Logger & { error: Logger["error"] } {
     clearScreen: vi.fn(),
     hasErrorLogged: vi.fn(() => false),
     hasWarned: false,
-  };
+  }
 }
 
 function createServer(
   logger: Logger,
   options: {
-    environmentLoggers?: Logger[];
-    httpServer?: EventEmitter | null;
-    includeEnvironments?: boolean;
-    watcher?: EventEmitter;
+    environmentLoggers?: Logger[]
+    httpServer?: EventEmitter | null
+    includeEnvironments?: boolean
+    watcher?: EventEmitter
   } = {},
 ): ViteDevServer {
   const {
@@ -31,7 +31,7 @@ function createServer(
     httpServer = new EventEmitter(),
     includeEnvironments = true,
     watcher,
-  } = options;
+  } = options
 
   return {
     config: { logger },
@@ -47,92 +47,92 @@ function createServer(
           ),
         }
       : {}),
-  } as unknown as ViteDevServer;
+  } as unknown as ViteDevServer
 }
 
 function configureServer(server: ViteDevServer): void {
-  const { configureServer: configure } = browserLogFilter;
-  if (typeof configure !== "function") {
-    throw new TypeError("Expected browserLogFilter to expose a configureServer hook.");
+  const { configureServer: configure } = browserLogFilter
+  if (typeof configure !== 'function') {
+    throw new TypeError('Expected browserLogFilter to expose a configureServer hook.')
   }
 
-  (configure as (server: ViteDevServer) => void)(server);
+  (configure as (server: ViteDevServer) => void)(server)
 }
 
-describe("browserLogFilter", () => {
-  it("mutes known noisy browser errors and forwards other errors", () => {
-    const logger = createLogger();
-    const originalError = logger.error;
-    const server = createServer(logger);
+describe('browserLogFilter', () => {
+  it('mutes known noisy browser errors and forwards other errors', () => {
+    const logger = createLogger()
+    const originalError = logger.error
+    const server = createServer(logger)
 
-    configureServer(server);
-    logger.error("ResizeObserver loop completed with undelivered notifications.");
-    logger.error("Real browser failure");
+    configureServer(server)
+    logger.error('ResizeObserver loop completed with undelivered notifications.')
+    logger.error('Real browser failure')
 
-    expect(originalError).toHaveBeenCalledTimes(1);
-    expect(originalError).toHaveBeenCalledWith("Real browser failure", undefined);
-  });
+    expect(originalError).toHaveBeenCalledTimes(1)
+    expect(originalError).toHaveBeenCalledWith('Real browser failure', undefined)
+  })
 
-  it("restores each wrapped logger when the server closes", () => {
-    const logger = createLogger();
-    const originalError = logger.error;
-    const httpServer = new EventEmitter();
+  it('restores each wrapped logger when the server closes', () => {
+    const logger = createLogger()
+    const originalError = logger.error
+    const httpServer = new EventEmitter()
 
-    configureServer(createServer(logger, { httpServer }));
+    configureServer(createServer(logger, { httpServer }))
 
-    expect(logger.error).not.toBe(originalError);
-    httpServer.emit("close");
-    expect(logger.error).toBe(originalError);
-  });
+    expect(logger.error).not.toBe(originalError)
+    httpServer.emit('close')
+    expect(logger.error).toBe(originalError)
+  })
 
-  it("keeps a shared logger wrapped until all servers close", () => {
-    const logger = createLogger();
-    const originalError = logger.error;
-    const firstHttpServer = new EventEmitter();
-    const firstWatcher = new EventEmitter();
-    const secondHttpServer = new EventEmitter();
+  it('keeps a shared logger wrapped until all servers close', () => {
+    const logger = createLogger()
+    const originalError = logger.error
+    const firstHttpServer = new EventEmitter()
+    const firstWatcher = new EventEmitter()
+    const secondHttpServer = new EventEmitter()
 
-    configureServer(createServer(logger, { httpServer: firstHttpServer, watcher: firstWatcher }));
-    const filteredError = logger.error;
-    configureServer(createServer(logger, { httpServer: secondHttpServer }));
+    configureServer(createServer(logger, { httpServer: firstHttpServer, watcher: firstWatcher }))
+    const filteredError = logger.error
+    configureServer(createServer(logger, { httpServer: secondHttpServer }))
 
-    expect(logger.error).toBe(filteredError);
-    firstHttpServer.emit("close");
-    firstWatcher.emit("close");
-    expect(logger.error).toBe(filteredError);
-    secondHttpServer.emit("close");
-    expect(logger.error).toBe(originalError);
-  });
+    expect(logger.error).toBe(filteredError)
+    firstHttpServer.emit('close')
+    firstWatcher.emit('close')
+    expect(logger.error).toBe(filteredError)
+    secondHttpServer.emit('close')
+    expect(logger.error).toBe(originalError)
+  })
 
-  it("restores from the watcher when no HTTP server is available", () => {
-    const logger = createLogger();
-    const originalError = logger.error;
-    const watcher = new EventEmitter();
+  it('restores from the watcher when no HTTP server is available', () => {
+    const logger = createLogger()
+    const originalError = logger.error
+    const watcher = new EventEmitter()
 
-    configureServer(createServer(logger, { httpServer: null, watcher }));
-    watcher.emit("close");
+    configureServer(createServer(logger, { httpServer: null, watcher }))
+    watcher.emit('close')
 
-    expect(logger.error).toBe(originalError);
-  });
+    expect(logger.error).toBe(originalError)
+  })
 
-  it("handles servers without environment loggers", () => {
-    const logger = createLogger();
-    const originalError = logger.error;
+  it('handles servers without environment loggers', () => {
+    const logger = createLogger()
+    const originalError = logger.error
 
-    configureServer(createServer(logger, { includeEnvironments: false }));
-    logger.error("Real browser failure");
+    configureServer(createServer(logger, { includeEnvironments: false }))
+    logger.error('Real browser failure')
 
-    expect(originalError).toHaveBeenCalledWith("Real browser failure", undefined);
-  });
+    expect(originalError).toHaveBeenCalledWith('Real browser failure', undefined)
+  })
 
-  it("does not double wrap a logger reused by the root config and an environment", () => {
-    const logger = createLogger();
-    const originalError = logger.error;
-    const httpServer = new EventEmitter();
+  it('does not double wrap a logger reused by the root config and an environment', () => {
+    const logger = createLogger()
+    const originalError = logger.error
+    const httpServer = new EventEmitter()
 
-    configureServer(createServer(logger, { environmentLoggers: [logger], httpServer }));
-    httpServer.emit("close");
+    configureServer(createServer(logger, { environmentLoggers: [logger], httpServer }))
+    httpServer.emit('close')
 
-    expect(logger.error).toBe(originalError);
-  });
-});
+    expect(logger.error).toBe(originalError)
+  })
+})

@@ -1,14 +1,14 @@
-type CanvasContextMock = {
-  font: string;
-  measureText: (text: string) => TextMetrics;
-};
+interface CanvasContextMock {
+  font: string
+  measureText: (text: string) => TextMetrics
+}
 
 function createCanvasContext(): CanvasContextMock {
   return {
-    font: "16px sans-serif",
+    font: '16px sans-serif',
     measureText(text: string): TextMetrics {
-      const fontSize = Number.parseFloat(this.font) || 16;
-      const width = text.length * fontSize * 0.5;
+      const fontSize = Number.parseFloat(this.font) || 16
+      const width = text.length * fontSize * 0.5
 
       return {
         actualBoundingBoxAscent: fontSize * 0.8,
@@ -23,30 +23,30 @@ function createCanvasContext(): CanvasContextMock {
         hangingBaseline: 0,
         ideographicBaseline: 0,
         width,
-      } as TextMetrics;
+      } as TextMetrics
     },
-  };
+  }
 }
 
 class OffscreenCanvasMock {
-  width: number;
-  height: number;
+  width: number
+  height: number
 
   constructor(width: number, height: number) {
-    this.width = width;
-    this.height = height;
+    this.width = width
+    this.height = height
   }
 
   getContext(type: string): OffscreenCanvasRenderingContext2D | null {
-    if (type !== "2d") {
-      return null;
+    if (type !== '2d') {
+      return null
     }
 
-    return createCanvasContext() as unknown as OffscreenCanvasRenderingContext2D;
+    return createCanvasContext() as unknown as OffscreenCanvasRenderingContext2D
   }
 }
 
-Object.defineProperty(globalThis, "OffscreenCanvas", {
+Object.defineProperty(globalThis, 'OffscreenCanvas', {
   configurable: true,
   value: OffscreenCanvasMock,
-});
+})
