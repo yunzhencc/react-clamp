@@ -1,0 +1,15 @@
+node_modules/
+dist/
+demo-dist/
+test-results/
+playwright-report/
+*.tgz
+.DS_Store
+
+.vitest/
+
+.upstream-results/
+
+artifacts/
+coverage/
+.githooks/

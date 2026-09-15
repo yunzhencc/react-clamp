@@ -1,0 +1,6 @@
+# A single library; no placeholder workspace packages or dependency catalogs.
+packages:
+  - .
+onlyBuiltDependencies:
+  - esbuild
+  - simple-git-hooks

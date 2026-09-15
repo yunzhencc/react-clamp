@@ -1,0 +1,185 @@
+{
+  "upstreamCommit": "9f93dbcc31f60b02dc34fbd6a9da9bf90edc6d84",
+  "source": "packages/vue-clamp/tests/demo-page.browser.test.ts",
+  "sourceSha256": "ad5e0df48fc4626436ad8c6f2414648a96266fbfa9232e9779fc6c3e459e040e",
+  "localFile": "tests/upstream/demo/demo-page.browser.test.ts",
+  "frameworkAdaptations": [
+    "Vue createApp is replaced by the React-only fixture mount adapter.",
+    "The real exported demo/App.tsx is imported instead of website App.vue.",
+    "Installation snippets use react-clamp and JSX prop syntax.",
+    "All 21 test bodies retain every upstream assertion and interaction."
+  ],
+  "cases": [
+    {
+      "upstreamId": "demo-page.browser.test.ts:687",
+      "name": "keeps the workspace line-clamp toggle demo within three visible lines at 585px",
+      "upstreamLine": 687,
+      "localLine": 688,
+      "status": "passed"
+    },
+    {
+      "upstreamId": "demo-page.browser.test.ts:702",
+      "name": "keeps the workspace line-clamp toggle demo close to browser fit across the narrow edge widths",
+      "upstreamLine": 702,
+      "localLine": 703,
+      "status": "passed"
+    },
+    {
+      "upstreamId": "demo-page.browser.test.ts:734",
+      "name": "switches line demo slot copy with the RTL examples",
+      "upstreamLine": 734,
+      "localLine": 735,
+      "status": "passed"
+    },
+    {
+      "upstreamId": "demo-page.browser.test.ts:771",
+      "name": "keeps the workspace line-clamp toggle demo close to the browser-fit maximum at 373px",
+      "upstreamLine": 771,
+      "localLine": 772,
+      "status": "passed"
+    },
+    {
+      "upstreamId": "demo-page.browser.test.ts:795",
+      "name": "updates all multiline demos from the shared line text editor",
+      "upstreamLine": 795,
+      "localLine": 796,
+      "status": "passed"
+    },
+    {
+      "upstreamId": "demo-page.browser.test.ts:833",
+      "name": "shows the rich html demo with editable article-style presets and end-only guidance",
+      "upstreamLine": 833,
+      "localLine": 834,
+      "status": "passed"
+    },
+    {
+      "upstreamId": "demo-page.browser.test.ts:919",
+      "name": "updates every RichLineClamp example from the shared rich HTML editor",
+      "upstreamLine": 919,
+      "localLine": 920,
+      "status": "passed"
+    },
+    {
+      "upstreamId": "demo-page.browser.test.ts:947",
+      "name": "applies numeric ratio locations in the location demo and stays aligned with browser fit",
+      "upstreamLine": 947,
+      "localLine": 948,
+      "status": "passed"
+    },
+    {
+      "upstreamId": "demo-page.browser.test.ts:1018",
+      "name": "switches between the documented component surfaces and shows their demos",
+      "upstreamLine": 1018,
+      "localLine": 1019,
+      "status": "passed"
+    },
+    {
+      "upstreamId": "demo-page.browser.test.ts:1224",
+      "name": "keeps shared demo controls sticky under the component tabs",
+      "upstreamLine": 1224,
+      "localLine": 1225,
+      "status": "passed"
+    },
+    {
+      "upstreamId": "demo-page.browser.test.ts:1279",
+      "name": "opens a stress playground with fps and workload controls",
+      "upstreamLine": 1279,
+      "localLine": 1280,
+      "status": "passed"
+    },
+    {
+      "upstreamId": "demo-page.browser.test.ts:1600",
+      "name": "scrolls to the tabs row when its in-flow top edge is above the viewport",
+      "upstreamLine": 1600,
+      "localLine": 1601,
+      "status": "passed"
+    },
+    {
+      "upstreamId": "demo-page.browser.test.ts:1629",
+      "name": "does not scroll when the tabs row in-flow top edge is already in view",
+      "upstreamLine": 1629,
+      "localLine": 1630,
+      "status": "passed"
+    },
+    {
+      "upstreamId": "demo-page.browser.test.ts:1653",
+      "name": "makes the component tabs horizontally scrollable at mobile widths",
+      "upstreamLine": 1653,
+      "localLine": 1654,
+      "status": "passed"
+    },
+    {
+      "upstreamId": "demo-page.browser.test.ts:1691",
+      "name": "introduces the four clamp components in a simple grid guide",
+      "upstreamLine": 1691,
+      "localLine": 1692,
+      "status": "passed"
+    },
+    {
+      "upstreamId": "demo-page.browser.test.ts:1726",
+      "name": "syncs the active component surface with route hashes",
+      "upstreamLine": 1726,
+      "localLine": 1727,
+      "status": "passed"
+    },
+    {
+      "upstreamId": "demo-page.browser.test.ts:1756",
+      "name": "renders a synchronized Pretext workload with predictive-eligible inputs",
+      "upstreamLine": 1756,
+      "localLine": 1757,
+      "status": "passed"
+    },
+    {
+      "upstreamId": "demo-page.browser.test.ts:1792",
+      "name": "initializes overlay scrollbars for shared horizontal containers",
+      "upstreamLine": 1792,
+      "localLine": 1793,
+      "status": "passed"
+    },
+    {
+      "upstreamId": "demo-page.browser.test.ts:1809",
+      "name": "surfaces concise API summaries for all components",
+      "upstreamLine": 1809,
+      "localLine": 1810,
+      "status": "passed"
+    },
+    {
+      "upstreamId": "demo-page.browser.test.ts:1912",
+      "name": "animates the hero tagline width at mobile content widths",
+      "upstreamLine": 1912,
+      "localLine": 1913,
+      "status": "passed"
+    },
+    {
+      "upstreamId": "demo-page.browser.test.ts:1937",
+      "name": "copies installation and example code from the website code blocks",
+      "upstreamLine": 1937,
+      "localLine": 1938,
+      "status": "passed"
+    }
+  ],
+  "typeContracts": {
+    "source": [
+      "type-surface.ts",
+      "wrap-slot-types.vue"
+    ],
+    "localFile": "tests/upstream/demo/type-surface.tsx",
+    "command": "npx tsc -p tests/upstream/demo/tsconfig.types.json",
+    "adaptations": [
+      "Vue exposed instances map to React ClampHandle and WrapClampHandle refs.",
+      "Vue item/affix slots map to React renderItem and before/after callbacks.",
+      "Vue multiline shell Ref/scheduler implementation contracts map to React source/ref tests elsewhere; no fictitious public Vue compatibility types are introduced.",
+      "Vue template slot requiredness is framework-specific compiler grammar. React supports both children mode and items/renderItem mode; its actual generic renderItem input, hiddenItems output and ref contracts are checked positively and negatively. No equivalence claim is made for Vue SFC slot grammar."
+    ],
+    "pending": []
+  },
+  "validation": {
+    "browser": "chromium",
+    "command": "npx vitest run --config vitest.upstream-demo.config.ts",
+    "passed": 21,
+    "failed": 0,
+    "typecheck": "passed",
+    "demoProductionBuild": "passed",
+    "note": "Full Chromium suite passed after .toggle-btn received self-contained button styling, preserving affix geometry when the upstream browser-fit oracle clones the clamp outside .parity-app."
+  }
+}

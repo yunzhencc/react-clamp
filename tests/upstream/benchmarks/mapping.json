@@ -1,0 +1,300 @@
+{
+  "upstreamRepository": "https://github.com/Justineo/vue-clamp",
+  "upstreamSha": "9f93dbcc31f60b02dc34fbd6a9da9bf90edc6d84",
+  "workloadCount": 114,
+  "testDeclarations": 9,
+  "files": [
+    {
+      "upstreamFile": "packages/vue-clamp/tests/invalidation.browser.benchmark.ts",
+      "adaptedFile": "tests/upstream/benchmarks/invalidation.browser.benchmark.ts",
+      "upstreamSha256": "62d907f7001b8511b7d03f9351d971d7999c8f04d8635b283a1b2042ad8e98e4",
+      "declarations": [
+        {
+          "upstream": {
+            "title": "reports active and expanded observer and listener overhead",
+            "line": 195
+          },
+          "adapted": {
+            "title": "reports active and expanded observer and listener overhead",
+            "line": 197
+          }
+        }
+      ],
+      "assertionCallSites": 1,
+      "scenarios": [
+        "active",
+        "expanded"
+      ],
+      "scenarioCount": 2,
+      "translation": "Vue fixture syntax uses a React-backed adapter; component subjects and low-level engines are the React library. Pretext VNode update counts use real React Profiler commits. Smoke reduces repetitions only; full mode keeps upstream repetitions."
+    },
+    {
+      "upstreamFile": "packages/vue-clamp/tests/pretext.browser.benchmark.ts",
+      "adaptedFile": "tests/upstream/benchmarks/pretext.browser.benchmark.ts",
+      "upstreamSha256": "9488db318625d6c2652b1e9a7671c3e20e5b73057affb567905a0f4b53d6f8b2",
+      "declarations": [
+        {
+          "upstream": {
+            "title": "compares the browser and Pretext resize hot paths",
+            "line": 488
+          },
+          "adapted": {
+            "title": "compares the browser and Pretext resize hot paths",
+            "line": 495
+          }
+        },
+        {
+          "upstream": {
+            "title": "reports component scheduling cost at scale",
+            "line": 580
+          },
+          "adapted": {
+            "title": "reports component scheduling cost at scale",
+            "line": 587
+          }
+        },
+        {
+          "upstream": {
+            "title": "decomposes repeated preparation cost",
+            "line": 620
+          },
+          "adapted": {
+            "title": "decomposes repeated preparation cost",
+            "line": 627
+          }
+        },
+        {
+          "upstream": {
+            "title": "reports cold mounting for repeated and unique text",
+            "line": 668
+          },
+          "adapted": {
+            "title": "reports cold mounting for repeated and unique text",
+            "line": 675
+          }
+        }
+      ],
+      "assertionCallSites": 12,
+      "scenarios": [
+        "resize:english:continuous",
+        "resize:english:jitter",
+        "resize:english:jumps",
+        "resize:cjk:continuous",
+        "resize:cjk:jitter",
+        "resize:cjk:jumps",
+        "resize:thai:continuous",
+        "resize:thai:jitter",
+        "resize:thai:jumps",
+        "resize:emoji:continuous",
+        "resize:emoji:jitter",
+        "resize:emoji:jumps",
+        "resize:mixed-script:continuous",
+        "resize:mixed-script:jitter",
+        "resize:mixed-script:jumps",
+        "resize:long-token:continuous",
+        "resize:long-token:jitter",
+        "resize:long-token:jumps",
+        "resize:custom-english-word:continuous",
+        "resize:custom-english-word:jitter",
+        "resize:custom-english-word:jumps",
+        "resize:custom-cjk-word:continuous",
+        "resize:custom-cjk-word:jitter",
+        "resize:custom-cjk-word:jumps",
+        "resize:custom-thai-word:continuous",
+        "resize:custom-thai-word:jitter",
+        "resize:custom-thai-word:jumps",
+        "resize:custom-emoji-grapheme:continuous",
+        "resize:custom-emoji-grapheme:jitter",
+        "resize:custom-emoji-grapheme:jumps",
+        "resize:custom-mixed-script-grapheme:continuous",
+        "resize:custom-mixed-script-grapheme:jitter",
+        "resize:custom-mixed-script-grapheme:jumps",
+        "resize:custom-long-token-grapheme:continuous",
+        "resize:custom-long-token-grapheme:jitter",
+        "resize:custom-long-token-grapheme:jumps",
+        "resize:custom-empty-word:continuous",
+        "resize:custom-empty-word:jitter",
+        "resize:custom-empty-word:jumps",
+        "scale:smooth",
+        "scale:jumps",
+        "preparation:boundaries",
+        "preparation:pretext",
+        "preparation:wrapper",
+        "cold-mount:repeated",
+        "cold-mount:unique"
+      ],
+      "scenarioCount": 46,
+      "translation": "Vue fixture syntax uses a React-backed adapter; component subjects and low-level engines are the React library. Pretext VNode update counts use real React Profiler commits. Smoke reduces repetitions only; full mode keeps upstream repetitions."
+    },
+    {
+      "upstreamFile": "packages/vue-clamp/tests/rich.browser.benchmark.ts",
+      "adaptedFile": "tests/upstream/benchmarks/rich.browser.benchmark.ts",
+      "upstreamSha256": "060d8c4acf6652ac3ab25e663bdb1d09f90944cb06f66a06e6fc2cd984e8dcb8",
+      "declarations": [
+        {
+          "upstream": {
+            "title": "reports direct and component rich clamp workloads",
+            "line": 634
+          },
+          "adapted": {
+            "title": "reports direct and component rich clamp workloads",
+            "line": 636
+          }
+        }
+      ],
+      "assertionCallSites": 2,
+      "scenarios": [
+        "direct-rich-fit-cold",
+        "direct-rich-fit-warm",
+        "direct-rich-continuous-cold",
+        "direct-rich-continuous-warm",
+        "direct-rich-jitter-cold",
+        "direct-rich-jitter-warm",
+        "direct-rich-jumps-cold",
+        "direct-rich-jumps-warm",
+        "direct-rich-dense-jumps-cold",
+        "direct-rich-dense-jumps-warm",
+        "component-rich-continuous",
+        "component-rich-jumps"
+      ],
+      "scenarioCount": 12,
+      "translation": "Vue fixture syntax uses a React-backed adapter; component subjects and low-level engines are the React library. Pretext VNode update counts use real React Profiler commits. Smoke reduces repetitions only; full mode keeps upstream repetitions."
+    },
+    {
+      "upstreamFile": "packages/vue-clamp/tests/text.browser.benchmark.ts",
+      "adaptedFile": "tests/upstream/benchmarks/text.browser.benchmark.ts",
+      "upstreamSha256": "37307b86a8683d6a4e661eb8328cd38b35805404838900837af879338d74aacb",
+      "declarations": [
+        {
+          "upstream": {
+            "title": "reports direct and component text clamp workloads",
+            "line": 769
+          },
+          "adapted": {
+            "title": "reports direct and component text clamp workloads",
+            "line": 771
+          }
+        }
+      ],
+      "assertionCallSites": 2,
+      "scenarios": [
+        "direct-line-continuous-cold",
+        "direct-line-continuous-warm",
+        "direct-line-jitter-cold",
+        "direct-line-jitter-warm",
+        "direct-line-jumps-cold",
+        "direct-line-jumps-warm",
+        "direct-inline-continuous-cold",
+        "direct-inline-continuous-warm",
+        "direct-inline-jitter-cold",
+        "direct-inline-jitter-warm",
+        "direct-inline-jumps-cold",
+        "direct-inline-jumps-warm",
+        "component-line-continuous",
+        "component-line-jumps",
+        "component-line-word-fallback-continuous",
+        "component-inline-continuous",
+        "component-inline-jumps"
+      ],
+      "scenarioCount": 17,
+      "translation": "Vue fixture syntax uses a React-backed adapter; component subjects and low-level engines are the React library. Pretext VNode update counts use real React Profiler commits. Smoke reduces repetitions only; full mode keeps upstream repetitions."
+    },
+    {
+      "upstreamFile": "packages/vue-clamp/tests/update.browser.benchmark.ts",
+      "adaptedFile": "tests/upstream/benchmarks/update.browser.benchmark.ts",
+      "upstreamSha256": "02ed9264a21f177c10b234260a3930dfa9303c36d054aa5e16e108038584ea36",
+      "declarations": [
+        {
+          "upstream": {
+            "title": "separates cold mount, unrelated attributes, source updates and captured slot updates",
+            "line": 190
+          },
+          "adapted": {
+            "title": "separates cold mount, unrelated attributes, source updates and captured slot updates",
+            "line": 192
+          }
+        }
+      ],
+      "assertionCallSites": 1,
+      "scenarios": [
+        "line:measured=false:affixed=false:unique=false",
+        "line:measured=true:affixed=false:unique=false",
+        "line:measured=true:affixed=true:unique=false",
+        "rich:measured=false:affixed=false:unique=false",
+        "rich:measured=true:affixed=false:unique=false",
+        "rich:measured=true:affixed=false:unique=true",
+        "rich:measured=true:affixed=true:unique=false",
+        "rich:measured=true:affixed=true:unique=true",
+        "wrap:measured=true:affixed=false:unique=false",
+        "wrap:measured=true:affixed=true:unique=false"
+      ],
+      "scenarioCount": 10,
+      "translation": "Vue fixture syntax uses a React-backed adapter; component subjects and low-level engines are the React library. Pretext VNode update counts use real React Profiler commits. Smoke reduces repetitions only; full mode keeps upstream repetitions."
+    },
+    {
+      "upstreamFile": "packages/vue-clamp/tests/wrap.browser.benchmark.ts",
+      "adaptedFile": "tests/upstream/benchmarks/wrap.browser.benchmark.ts",
+      "upstreamSha256": "2ad48b853fd33c915c6f76a683ec6f3a25aed5ce5fb92ec4b5c00ed068527a5f",
+      "declarations": [
+        {
+          "upstream": {
+            "title": "reports current workload benchmark results",
+            "line": 1736
+          },
+          "adapted": {
+            "title": "reports current workload benchmark results",
+            "line": 1738
+          }
+        }
+      ],
+      "assertionCallSites": 2,
+      "scenarios": [
+        "single-line-width-sweep",
+        "table-demo-width-sweep",
+        "table-demo-width-churn",
+        "no-affix-jump-grow",
+        "no-affix-shrink",
+        "no-affix-hidden-grow",
+        "no-affix-large-n",
+        "no-affix-narrow-item-grow",
+        "no-affix-wide-item-grow",
+        "no-affix-wide-container-grow",
+        "no-affix-tiny-item-wide-grow",
+        "no-affix-mixed-item-grow",
+        "no-affix-heavy-item-grow",
+        "before-affix-grow",
+        "before-affix-shrink",
+        "dynamic-before-grow",
+        "dynamic-before-shrink",
+        "static-after-grow",
+        "static-after-shrink",
+        "static-before-dynamic-after-grow",
+        "after-affix-shrink",
+        "max-height-grow",
+        "max-height-shrink",
+        "before-max-height-grow",
+        "before-max-height-shrink",
+        "mixed-lines-height-grow",
+        "mixed-lines-height-shrink"
+      ],
+      "scenarioCount": 27,
+      "translation": "Vue fixture syntax uses a React-backed adapter; component subjects and low-level engines are the React library. Pretext VNode update counts use real React Profiler commits. Smoke reduces repetitions only; full mode keeps upstream repetitions."
+    }
+  ],
+  "verification": {
+    "mode": "full",
+    "status": "passed",
+    "command": "npm run test:upstream:benchmarks",
+    "files": 6,
+    "declarations": 9,
+    "workloads": 114,
+    "originalRepetitionsVerified": true,
+    "report": "docs/upstream-benchmark-verification.json",
+    "inputsDigest": "c340d2654113dec1c418477812edc21001ebb157194fb6222b289e17a76c0c1c",
+    "vitestReportSha256": "13b82b1b579f70d40587574b6c886c127ce7045b0388129112c36d51bc1ea51e",
+    "metricsReport": {
+      "path": ".upstream-results/benchmark-metrics.json",
+      "sha256": "2ed2eb212accbcbc55c744a2220e898b3236c41e61bd05459afa2f683fdf42bb"
+    }
+  }
+}

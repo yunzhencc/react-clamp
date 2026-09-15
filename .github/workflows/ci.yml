@@ -1,0 +1,78 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      benchmarks:
+        description: Run the full upstream benchmark workloads
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        react: [18, 19]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Select React version
+        if: matrix.react == 18
+        run: pnpm add -D react@18.3.1 react-dom@18.3.1 @types/react@18 @types/react-dom@18
+      - run: pnpm exec playwright install --with-deps chromium firefox webkit
+      - name: Original build, types, SSR and browser regressions
+        run: pnpm run check
+      - name: All upstream functional and React type contracts
+        run: pnpm run test:upstream
+      - name: Verify complete current-source correspondence
+        run: pnpm run test:upstream:verify
+      - run: pnpm run build:demo
+      - name: Save verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verification-react-${{ matrix.react }}
+          include-hidden-files: true
+          path: |
+            .upstream-results/
+            docs/upstream-verification.json
+            playwright-report/
+            test-results/
+          retention-days: 7
+
+  benchmarks:
+    if: github.event_name == 'workflow_dispatch' && inputs.benchmarks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - name: Full upstream benchmark repetitions
+        run: pnpm run test:upstream:benchmarks
+      - name: Save benchmark evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: upstream-benchmarks-react-19
+          include-hidden-files: true
+          path: |
+            .upstream-results/
+            docs/upstream-benchmark*.json
+          retention-days: 7

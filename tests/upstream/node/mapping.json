@@ -1,0 +1,1856 @@
+{
+  "upstreamRepository": "https://github.com/Justineo/vue-clamp",
+  "upstreamSha": "9f93dbcc31f60b02dc34fbd6a9da9bf90edc6d84",
+  "files": [
+    {
+      "upstreamFile": "packages/vue-clamp/tests/benchmark-statistics.test.ts",
+      "adaptedFile": "tests/upstream/node/benchmark-statistics.test.ts",
+      "translation": "Exact assertions against extracted upstream paired statistics used by React benchmark tooling, with no Vue runtime subject.",
+      "tests": [
+        {
+          "upstream": {
+            "title": "separates a consistent improvement from large shared round-to-round drift",
+            "line": 5,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "separates a consistent improvement from large shared round-to-round drift",
+            "line": 6,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "does not classify noisy differences or identical samples as equivalent or slower",
+            "line": 15,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "does not classify noisy differences or identical samples as equivalent or slower",
+            "line": 16,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "reports absolute added cost without dividing by a zero baseline",
+            "line": 23,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "reports absolute added cost without dividing by a zero baseline",
+            "line": 24,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "rejects unmatched, missing, or non-finite measurements",
+            "line": 31,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "rejects unmatched, missing, or non-finite measurements",
+            "line": 32,
+            "parameterized": false
+          }
+        }
+      ],
+      "runtimeCases": [
+        {
+          "fullName": "paired benchmark comparisons separates a consistent improvement from large shared round-to-round drift",
+          "status": "passed"
+        },
+        {
+          "fullName": "paired benchmark comparisons does not classify noisy differences or identical samples as equivalent or slower",
+          "status": "passed"
+        },
+        {
+          "fullName": "paired benchmark comparisons reports absolute added cost without dividing by a zero baseline",
+          "status": "passed"
+        },
+        {
+          "fullName": "paired benchmark comparisons rejects unmatched, missing, or non-finite measurements",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "upstreamFile": "packages/vue-clamp/tests/browser-log-filter.test.ts",
+      "adaptedFile": "tests/upstream/node/browser-log-filter.test.ts",
+      "translation": "Exact assertions against ported Vite browser logger lifecycle plugin; plugin name uses react-clamp namespace.",
+      "tests": [
+        {
+          "upstream": {
+            "title": "mutes known noisy browser errors and forwards other errors",
+            "line": 62,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "mutes known noisy browser errors and forwards other errors",
+            "line": 63,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "restores each wrapped logger when the server closes",
+            "line": 75,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "restores each wrapped logger when the server closes",
+            "line": 76,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "keeps a shared logger wrapped until all servers close",
+            "line": 87,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "keeps a shared logger wrapped until all servers close",
+            "line": 88,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "restores from the watcher when no HTTP server is available",
+            "line": 106,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "restores from the watcher when no HTTP server is available",
+            "line": 107,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "handles servers without environment loggers",
+            "line": 117,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "handles servers without environment loggers",
+            "line": 118,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "does not double wrap a logger reused by the root config and an environment",
+            "line": 127,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "does not double wrap a logger reused by the root config and an environment",
+            "line": 128,
+            "parameterized": false
+          }
+        }
+      ],
+      "runtimeCases": [
+        {
+          "fullName": "browserLogFilter mutes known noisy browser errors and forwards other errors",
+          "status": "passed"
+        },
+        {
+          "fullName": "browserLogFilter restores each wrapped logger when the server closes",
+          "status": "passed"
+        },
+        {
+          "fullName": "browserLogFilter keeps a shared logger wrapped until all servers close",
+          "status": "passed"
+        },
+        {
+          "fullName": "browserLogFilter restores from the watcher when no HTTP server is available",
+          "status": "passed"
+        },
+        {
+          "fullName": "browserLogFilter handles servers without environment loggers",
+          "status": "passed"
+        },
+        {
+          "fullName": "browserLogFilter does not double wrap a logger reused by the root config and an environment",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "upstreamFile": "packages/vue-clamp/tests/exports.test.ts",
+      "adaptedFile": "tests/upstream/node/exports.test.ts",
+      "translation": "React forwardRef exports are objects: inspect render.name. Pretext export LineClamp wraps function PredictiveLineClamp. Export names and hidden runtime helpers remain exact.",
+      "tests": [
+        {
+          "upstream": {
+            "title": "exports the documented root components",
+            "line": 6,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "exports the documented root components",
+            "line": 11,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "does not expose the old Clamp alias",
+            "line": 13,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "does not expose the old Clamp alias",
+            "line": 19,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "does not expose internal runtime helpers",
+            "line": 17,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "does not expose internal runtime helpers",
+            "line": 23,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "exports the opt-in Pretext component from its own entry",
+            "line": 23,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "exports the opt-in Pretext component from its own entry",
+            "line": 29,
+            "parameterized": false
+          }
+        }
+      ],
+      "runtimeCases": [
+        {
+          "fullName": "Public exports exports the documented root components",
+          "status": "passed"
+        },
+        {
+          "fullName": "Public exports does not expose the old Clamp alias",
+          "status": "passed"
+        },
+        {
+          "fullName": "Public exports does not expose internal runtime helpers",
+          "status": "passed"
+        },
+        {
+          "fullName": "Public exports exports the opt-in Pretext component from its own entry",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "upstreamFile": "packages/vue-clamp/tests/layout.test.ts",
+      "adaptedFile": "tests/upstream/node/layout.test.ts",
+      "translation": "Exact upstream test declarations, parameter rows and assertions; imports target the React library engine.",
+      "tests": [
+        {
+          "upstream": {
+            "title": "counts physical line boxes rather than inline fragments",
+            "line": 17,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "counts physical line boxes rather than inline fragments",
+            "line": 18,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "preserves tolerant line grouping for overlapping and unordered fragments",
+            "line": 28,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "preserves tolerant line grouping for overlapping and unordered fragments",
+            "line": 29,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "processes long ordered line lists without comparing every earlier line",
+            "line": 67,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "processes long ordered line lists without comparing every earlier line",
+            "line": 68,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "detects unresolved width references",
+            "line": 86,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "detects unresolved width references",
+            "line": 87,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "accepts only content-independent inline widths",
+            "line": 93,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "accepts only content-independent inline widths",
+            "line": 94,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "rejects content-dependent inline widths",
+            "line": 100,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "rejects content-dependent inline widths",
+            "line": 101,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "serializes coalesced requests made during a running task",
+            "line": 110,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "serializes coalesced requests made during a running task",
+            "line": 111,
+            "parameterized": false
+          }
+        }
+      ],
+      "runtimeCases": [
+        {
+          "fullName": "layout style helpers counts physical line boxes rather than inline fragments",
+          "status": "passed"
+        },
+        {
+          "fullName": "layout style helpers preserves tolerant line grouping for overlapping and unordered fragments",
+          "status": "passed"
+        },
+        {
+          "fullName": "layout style helpers processes long ordered line lists without comparing every earlier line",
+          "status": "passed"
+        },
+        {
+          "fullName": "layout style helpers detects unresolved width references",
+          "status": "passed"
+        },
+        {
+          "fullName": "layout style helpers accepts only content-independent inline widths",
+          "status": "passed"
+        },
+        {
+          "fullName": "layout style helpers rejects content-dependent inline widths",
+          "status": "passed"
+        },
+        {
+          "fullName": "coalescing runner serializes coalesced requests made during a running task",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "upstreamFile": "packages/vue-clamp/tests/native.test.ts",
+      "adaptedFile": "tests/upstream/node/native.test.ts",
+      "translation": "Exact upstream test declarations, parameter rows and assertions; imports target the React library engine.",
+      "tests": [
+        {
+          "upstream": {
+            "title": "selects semantically eligible multiline clamps",
+            "line": 17,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "selects semantically eligible multiline clamps",
+            "line": 18,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "keeps custom ellipses off the legacy native path",
+            "line": 21,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "keeps custom ellipses off the legacy native path",
+            "line": 22,
+            "parameterized": false
+          }
+        }
+      ],
+      "runtimeCases": [
+        {
+          "fullName": "native clamp selection selects semantically eligible multiline clamps",
+          "status": "passed"
+        },
+        {
+          "fullName": "native clamp selection keeps custom ellipses off the legacy native path",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "upstreamFile": "packages/vue-clamp/tests/pretext.test.ts",
+      "adaptedFile": "tests/upstream/node/pretext.test.ts",
+      "translation": "Exact upstream test declarations, parameter rows and assertions; imports target the React library engine.",
+      "tests": [
+        {
+          "upstream": {
+            "title": "preserves source text that fits",
+            "line": 7,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "preserves source text that fits",
+            "line": 8,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "materializes an end-clamped prefix",
+            "line": 16,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "materializes an end-clamped prefix",
+            "line": 17,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "supports custom and empty ellipses",
+            "line": 25,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "supports custom and empty ellipses",
+            "line": 26,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "supports grapheme boundaries when native clamping cannot",
+            "line": 39,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "supports grapheme boundaries when native clamping cannot",
+            "line": 40,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "falls back inside a word when necessary",
+            "line": 51,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "falls back inside a word when necessary",
+            "line": 52,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "uses only what can fit at very narrow widths",
+            "line": 60,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "uses only what can fit at very narrow widths",
+            "line": 61,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "accounts for before and after affix occupancy",
+            "line": 77,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "accounts for before and after affix occupancy",
+            "line": 78,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "does not treat spare lines as room for an oversized grapheme",
+            "line": 87,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "does not treat spare lines as room for an oversized grapheme",
+            "line": 88,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "moves an emergency-broken leading token to the next line",
+            "line": 94,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "moves an emergency-broken leading token to the next line",
+            "line": 95,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "never cuts through a composed grapheme",
+            "line": 103,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "never cuts through a composed grapheme",
+            "line": 104,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "uses Pretext whitespace normalization for boundary mapping",
+            "line": 120,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "uses Pretext whitespace normalization for boundary mapping",
+            "line": 121,
+            "parameterized": false
+          }
+        }
+      ],
+      "runtimeCases": [
+        {
+          "fullName": "Pretext line clamping preserves source text that fits",
+          "status": "passed"
+        },
+        {
+          "fullName": "Pretext line clamping materializes an end-clamped prefix",
+          "status": "passed"
+        },
+        {
+          "fullName": "Pretext line clamping supports custom and empty ellipses",
+          "status": "passed"
+        },
+        {
+          "fullName": "Pretext line clamping supports grapheme boundaries when native clamping cannot",
+          "status": "passed"
+        },
+        {
+          "fullName": "Pretext line clamping falls back inside a word when necessary",
+          "status": "passed"
+        },
+        {
+          "fullName": "Pretext line clamping uses only what can fit at very narrow widths",
+          "status": "passed"
+        },
+        {
+          "fullName": "Pretext line clamping accounts for before and after affix occupancy",
+          "status": "passed"
+        },
+        {
+          "fullName": "Pretext line clamping does not treat spare lines as room for an oversized grapheme",
+          "status": "passed"
+        },
+        {
+          "fullName": "Pretext line clamping moves an emergency-broken leading token to the next line",
+          "status": "passed"
+        },
+        {
+          "fullName": "Pretext line clamping never cuts through a composed grapheme",
+          "status": "passed"
+        },
+        {
+          "fullName": "Pretext line clamping uses Pretext whitespace normalization for boundary mapping",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "upstreamFile": "packages/vue-clamp/tests/search.test.ts",
+      "adaptedFile": "tests/upstream/node/search.test.ts",
+      "translation": "Exact upstream test declarations, parameter rows and assertions; imports target the React library engine.",
+      "tests": [
+        {
+          "upstream": {
+            "title": "describes local warm-search coverage from the expansion budget",
+            "line": 189,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "describes local warm-search coverage from the expansion budget",
+            "line": 190,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "counts a same-rank warm search as a local proof",
+            "line": 194,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "counts a same-rank warm search as a local proof",
+            "line": 195,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "distinguishes local growth from growth that falls back to binary search",
+            "line": 198,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "distinguishes local growth from growth that falls back to binary search",
+            "line": 199,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "shows fixed pixel windows are not an optimality proof",
+            "line": 205,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "shows fixed pixel windows are not an optimality proof",
+            "line": 206,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "compares warm and cold over the full target-rank interval",
+            "line": 246,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "compares warm and cold over the full target-rank interval",
+            "line": 247,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "normalizes target intervals and extra cold cost in the shared cost model",
+            "line": 267,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "normalizes target intervals and extra cold cost in the shared cost model",
+            "line": 268,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "bounds target rank from width, visible capacity, and candidate advance",
+            "line": 293,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "bounds target rank from width, visible capacity, and candidate advance",
+            "line": 294,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "tightens target-rank uncertainty from local candidate advances",
+            "line": 354,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "tightens target-rank uncertainty from local candidate advances",
+            "line": 355,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "falls back to global target-rank bounds when local advances are missing",
+            "line": 435,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "falls back to global target-rank bounds when local advances are missing",
+            "line": 436,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "derives warm width room from layout physics instead of a fixed pixel window",
+            "line": 449,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "derives warm width room from layout physics instead of a fixed pixel window",
+            "line": 450,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "requires line-capacity evidence before widening the dynamic warm window",
+            "line": 513,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "requires line-capacity evidence before widening the dynamic warm window",
+            "line": 514,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "uses total packing slack in opposite directions only with shrink line-break proof",
+            "line": 575,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "uses total packing slack in opposite directions only with shrink line-break proof",
+            "line": 576,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "needs only the next rejected local advances when packing slack is known",
+            "line": 623,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "needs only the next rejected local advances when packing slack is known",
+            "line": 624,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "keeps warm rank room equivalent to interval decisions across input space",
+            "line": 701,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "keeps warm rank room equivalent to interval decisions across input space",
+            "line": 702,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "places warm width room on the local interval decision boundary",
+            "line": 738,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "places warm width room on the local interval decision boundary",
+            "line": 739,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "keeps warm width room aligned with interval decisions across physical inputs",
+            "line": 861,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "keeps warm width room aligned with interval decisions across physical inputs",
+            "line": 862,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "widens target-rank uncertainty when physical inputs are missing",
+            "line": 951,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "widens target-rank uncertainty when physical inputs are missing",
+            "line": 952,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "requires measured patch credit before accepting ambiguous intervals",
+            "line": 975,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "requires measured patch credit before accepting ambiguous intervals",
+            "line": 976,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "quantifies the whole-probe credit required before accepting warm search",
+            "line": 990,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "quantifies the whole-probe credit required before accepting warm search",
+            "line": 991,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "describes an auditable warm-search decision",
+            "line": 1027,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "describes an auditable warm-search decision",
+            "line": 1028,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "uses patch-vector dominance only as a probe-count tie breaker",
+            "line": 1058,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "uses patch-vector dominance only as a probe-count tie breaker",
+            "line": 1059,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "counts a skipped full-fit precheck separately from patch credit",
+            "line": 1085,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "counts a skipped full-fit precheck separately from patch credit",
+            "line": 1086,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "applies the model decision rule before benchmark validation",
+            "line": 1092,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "applies the model decision rule before benchmark validation",
+            "line": 1093,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "matches the actual cold search probe count across candidate counts",
+            "line": 1151,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "matches the actual cold search probe count across candidate counts",
+            "line": 1152,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "keeps the cold search upper bound above every exact probe count",
+            "line": 1161,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "keeps the cold search upper bound above every exact probe count",
+            "line": 1162,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "matches the actual warm search probe count across resize distances",
+            "line": 1171,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "matches the actual warm search probe count across resize distances",
+            "line": 1172,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "returns the lower bound without probing empty or single-count ranges",
+            "line": 1199,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "returns the lower bound without probing empty or single-count ranges",
+            "line": 1200,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "keeps the no-hint count search on ceil-midpoint probe order",
+            "line": 1211,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "keeps the no-hint count search on ceil-midpoint probe order",
+            "line": 1212,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "warm-starts count search from the hinted count",
+            "line": 1222,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "warm-starts count search from the hinted count",
+            "line": 1223,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "preserves the known-safe lower bound if every probed count fails",
+            "line": 1238,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "preserves the known-safe lower bound if every probed count fails",
+            "line": 1239,
+            "parameterized": false
+          }
+        }
+      ],
+      "runtimeCases": [
+        {
+          "fullName": "search cost estimates describes local warm-search coverage from the expansion budget",
+          "status": "passed"
+        },
+        {
+          "fullName": "search cost estimates counts a same-rank warm search as a local proof",
+          "status": "passed"
+        },
+        {
+          "fullName": "search cost estimates distinguishes local growth from growth that falls back to binary search",
+          "status": "passed"
+        },
+        {
+          "fullName": "search cost estimates shows fixed pixel windows are not an optimality proof",
+          "status": "passed"
+        },
+        {
+          "fullName": "search cost estimates compares warm and cold over the full target-rank interval",
+          "status": "passed"
+        },
+        {
+          "fullName": "search cost estimates normalizes target intervals and extra cold cost in the shared cost model",
+          "status": "passed"
+        },
+        {
+          "fullName": "search cost estimates bounds target rank from width, visible capacity, and candidate advance",
+          "status": "passed"
+        },
+        {
+          "fullName": "search cost estimates tightens target-rank uncertainty from local candidate advances",
+          "status": "passed"
+        },
+        {
+          "fullName": "search cost estimates falls back to global target-rank bounds when local advances are missing",
+          "status": "passed"
+        },
+        {
+          "fullName": "search cost estimates derives warm width room from layout physics instead of a fixed pixel window",
+          "status": "passed"
+        },
+        {
+          "fullName": "search cost estimates requires line-capacity evidence before widening the dynamic warm window",
+          "status": "passed"
+        },
+        {
+          "fullName": "search cost estimates uses total packing slack in opposite directions only with shrink line-break proof",
+          "status": "passed"
+        },
+        {
+          "fullName": "search cost estimates needs only the next rejected local advances when packing slack is known",
+          "status": "passed"
+        },
+        {
+          "fullName": "search cost estimates keeps warm rank room equivalent to interval decisions across input space",
+          "status": "passed"
+        },
+        {
+          "fullName": "search cost estimates places warm width room on the local interval decision boundary",
+          "status": "passed"
+        },
+        {
+          "fullName": "search cost estimates keeps warm width room aligned with interval decisions across physical inputs",
+          "status": "passed"
+        },
+        {
+          "fullName": "search cost estimates widens target-rank uncertainty when physical inputs are missing",
+          "status": "passed"
+        },
+        {
+          "fullName": "search cost estimates requires measured patch credit before accepting ambiguous intervals",
+          "status": "passed"
+        },
+        {
+          "fullName": "search cost estimates quantifies the whole-probe credit required before accepting warm search",
+          "status": "passed"
+        },
+        {
+          "fullName": "search cost estimates describes an auditable warm-search decision",
+          "status": "passed"
+        },
+        {
+          "fullName": "search cost estimates uses patch-vector dominance only as a probe-count tie breaker",
+          "status": "passed"
+        },
+        {
+          "fullName": "search cost estimates counts a skipped full-fit precheck separately from patch credit",
+          "status": "passed"
+        },
+        {
+          "fullName": "search cost estimates applies the model decision rule before benchmark validation",
+          "status": "passed"
+        },
+        {
+          "fullName": "search cost estimates matches the actual cold search probe count across candidate counts",
+          "status": "passed"
+        },
+        {
+          "fullName": "search cost estimates keeps the cold search upper bound above every exact probe count",
+          "status": "passed"
+        },
+        {
+          "fullName": "search cost estimates matches the actual warm search probe count across resize distances",
+          "status": "passed"
+        },
+        {
+          "fullName": "largest fitting count search returns the lower bound without probing empty or single-count ranges",
+          "status": "passed"
+        },
+        {
+          "fullName": "largest fitting count search keeps the no-hint count search on ceil-midpoint probe order",
+          "status": "passed"
+        },
+        {
+          "fullName": "largest fitting count search warm-starts count search from the hinted count",
+          "status": "passed"
+        },
+        {
+          "fullName": "largest fitting count search preserves the known-safe lower bound if every probed count fails",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "upstreamFile": "packages/vue-clamp/tests/template-ref-source.test.ts",
+      "adaptedFile": "tests/upstream/node/template-ref-source.test.ts",
+      "translation": "Vue SFC/template compiler checks translate to parsing actual React TSX JSX and asserting direct useRef object bindings and shared forwardRef render delegation. Original declarations preserved; Vue-specific syntax is not asserted against React.",
+      "tests": [
+        {
+          "upstream": {
+            "title": "keeps InlineClamp on compiler template refs",
+            "line": 27,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "keeps InlineClamp on compiler template refs",
+            "line": 7,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "keeps multiline components render-only with direct element refs",
+            "line": 39,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "keeps multiline components render-only with direct element refs",
+            "line": 17,
+            "parameterized": false
+          }
+        }
+      ],
+      "runtimeCases": [
+        {
+          "fullName": "React render refs keeps InlineClamp on compiler template refs",
+          "status": "passed"
+        },
+        {
+          "fullName": "React render refs keeps multiline components render-only with direct element refs",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "upstreamFile": "packages/vue-clamp/tests/text-search-anchor.test.ts",
+      "adaptedFile": "tests/upstream/node/text-search-anchor.test.ts",
+      "translation": "Exact upstream test declarations, parameter rows and assertions; imports target the React library engine.",
+      "tests": [
+        {
+          "upstream": {
+            "title": "reuses a rejected text after intervening fitting candidates",
+            "line": 35,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "reuses a rejected text after intervening fitting candidates",
+            "line": 36,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "keeps the bare full-source check separate from repeated marked text",
+            "line": 50,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "keeps the bare full-source check separate from repeated marked text",
+            "line": 51,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "uses the current verdict to bound projection without rechecking the anchor",
+            "line": 62,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "uses the current verdict to bound projection without rechecking the anchor",
+            "line": 63,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "retains exhaustive marked-rank answers and independently checks unmarked full text",
+            "line": 73,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "retains exhaustive marked-rank answers and independently checks unmarked full text",
+            "line": 74,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "only removes density probes after reading the displayed candidate",
+            "line": 99,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "only removes density probes after reading the displayed candidate",
+            "line": 100,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "ignores anchors from a different rank space",
+            "line": 123,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "ignores anchors from a different rank space",
+            "line": 124,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "retains descending evaluation for nonmonotonic shaping",
+            "line": 136,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "retains descending evaluation for nonmonotonic shaping",
+            "line": 137,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "starts a fresh rank domain for word fallback",
+            "line": 146,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "starts a fresh rank domain for word fallback",
+            "line": 147,
+            "parameterized": false
+          }
+        }
+      ],
+      "runtimeCases": [
+        {
+          "fullName": "current candidate anchor reuses a rejected text after intervening fitting candidates",
+          "status": "passed"
+        },
+        {
+          "fullName": "current candidate anchor keeps the bare full-source check separate from repeated marked text",
+          "status": "passed"
+        },
+        {
+          "fullName": "current candidate anchor uses the current verdict to bound projection without rechecking the anchor",
+          "status": "passed"
+        },
+        {
+          "fullName": "current candidate anchor retains exhaustive marked-rank answers and independently checks unmarked full text",
+          "status": "passed"
+        },
+        {
+          "fullName": "current candidate anchor only removes density probes after reading the displayed candidate",
+          "status": "passed"
+        },
+        {
+          "fullName": "current candidate anchor ignores anchors from a different rank space",
+          "status": "passed"
+        },
+        {
+          "fullName": "current candidate anchor retains descending evaluation for nonmonotonic shaping",
+          "status": "passed"
+        },
+        {
+          "fullName": "current candidate anchor starts a fresh rank domain for word fallback",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "upstreamFile": "packages/vue-clamp/tests/text.test.ts",
+      "adaptedFile": "tests/upstream/node/text.test.ts",
+      "translation": "Exact upstream test declarations, parameter rows and assertions; imports target the React library engine.",
+      "tests": [
+        {
+          "upstream": {
+            "title": "uses compatible observed overflow only when the width changes",
+            "line": 32,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "uses compatible observed overflow only when the width changes",
+            "line": 33,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "rejects changed source, layout or a previously full result",
+            "line": 40,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "rejects changed source, layout or a previously full result",
+            "line": 41,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "maps full-width density through uneven primary word lengths",
+            "line": 57,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "maps full-width density through uneven primary word lengths",
+            "line": 58,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "keeps fallback density in its own grapheme rank space",
+            "line": 74,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "keeps fallback density in its own grapheme rank space",
+            "line": 75,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "prepares ASCII grapheme boundaries",
+            "line": 86,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "prepares ASCII grapheme boundaries",
+            "line": 87,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "matches native boundaries across writing systems and composed sequences",
+            "line": 90,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "matches native boundaries across writing systems and composed sequences",
+            "line": 91,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "matches native boundaries throughout the compact single-unit range",
+            "line": 128,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "matches native boundaries throughout the compact single-unit range",
+            "line": 129,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "keeps deferred word boundaries and fallbacks identical across mixed Unicode sources",
+            "line": 168,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "keeps deferred word boundaries and fallbacks identical across mixed Unicode sources",
+            "line": 169,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "keeps grapheme clusters intact for emoji",
+            "line": 206,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "keeps grapheme clusters intact for emoji",
+            "line": 207,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "builds end-clamped text from a kept grapheme count",
+            "line": 216,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "builds end-clamped text from a kept grapheme count",
+            "line": 217,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "builds middle-clamped text from a kept grapheme count",
+            "line": 222,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "builds middle-clamped text from a kept grapheme count",
+            "line": 223,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "builds ratio-clamped text from a kept grapheme count",
+            "line": 228,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "builds ratio-clamped text from a kept grapheme count",
+            "line": 229,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "can preserve outer spacing for inline split text",
+            "line": 234,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "can preserve outer spacing for inline split text",
+            "line": 235,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "can clamp text at word boundaries",
+            "line": 240,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "can clamp text at word boundaries",
+            "line": 241,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "falls back to grapheme boundaries when no word boundary fits",
+            "line": 246,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "falls back to grapheme boundaries when no word boundary fits",
+            "line": 247,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "can warm-start text fitting near the previous fit",
+            "line": 259,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "can warm-start text fitting near the previous fit",
+            "line": 260,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "can warm-start text fitting downward from an oversized previous fit",
+            "line": 294,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "can warm-start text fitting downward from an oversized previous fit",
+            "line": 295,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "can include the full text as a warm search candidate",
+            "line": 319,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "can include the full text as a warm search candidate",
+            "line": 320,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "verifies the full candidate when ellipsis breaks monotonic fitting",
+            "line": 346,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "verifies the full candidate when ellipsis breaks monotonic fitting",
+            "line": 347,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "does not warm-start text fitting from another spacing mode",
+            "line": 372,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "does not warm-start text fitting from another spacing mode",
+            "line": 373,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "shares only identical source and boundary",
+            "line": 407,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "shares only identical source and boundary",
+            "line": 408,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "does not retain oversized inputs and evicts the preceding entry",
+            "line": 416,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "does not retain oversized inputs and evicts the preceding entry",
+            "line": 417,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "includes the size boundary and separates successive sources",
+            "line": 423,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "includes the size boundary and separates successive sources",
+            "line": 424,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "reuses four interleaved sources and evicts the least recently used preparation",
+            "line": 432,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "reuses four interleaved sources and evicts the least recently used preparation",
+            "line": 433,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "bounds the combined source budget across preparation entries",
+            "line": 444,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "bounds the combined source budget across preparation entries",
+            "line": 445,
+            "parameterized": false
+          }
+        }
+      ],
+      "runtimeCases": [
+        {
+          "fullName": "full-text overflow observations uses compatible observed overflow only when the width changes",
+          "status": "passed"
+        },
+        {
+          "fullName": "full-text overflow observations rejects changed source, layout or a previously full result",
+          "status": "passed"
+        },
+        {
+          "fullName": "text helpers maps full-width density through uneven primary word lengths",
+          "status": "passed"
+        },
+        {
+          "fullName": "text helpers keeps fallback density in its own grapheme rank space",
+          "status": "passed"
+        },
+        {
+          "fullName": "text helpers prepares ASCII grapheme boundaries",
+          "status": "passed"
+        },
+        {
+          "fullName": "text helpers matches native boundaries across writing systems and composed sequences",
+          "status": "passed"
+        },
+        {
+          "fullName": "text helpers matches native boundaries throughout the compact single-unit range",
+          "status": "passed"
+        },
+        {
+          "fullName": "text helpers keeps deferred word boundaries and fallbacks identical across mixed Unicode sources",
+          "status": "passed"
+        },
+        {
+          "fullName": "text helpers keeps grapheme clusters intact for emoji",
+          "status": "passed"
+        },
+        {
+          "fullName": "text helpers builds end-clamped text from a kept grapheme count",
+          "status": "passed"
+        },
+        {
+          "fullName": "text helpers builds middle-clamped text from a kept grapheme count",
+          "status": "passed"
+        },
+        {
+          "fullName": "text helpers builds ratio-clamped text from a kept grapheme count",
+          "status": "passed"
+        },
+        {
+          "fullName": "text helpers can preserve outer spacing for inline split text",
+          "status": "passed"
+        },
+        {
+          "fullName": "text helpers can clamp text at word boundaries",
+          "status": "passed"
+        },
+        {
+          "fullName": "text helpers falls back to grapheme boundaries when no word boundary fits",
+          "status": "passed"
+        },
+        {
+          "fullName": "text helpers can warm-start text fitting near the previous fit",
+          "status": "passed"
+        },
+        {
+          "fullName": "text helpers can warm-start text fitting downward from an oversized previous fit",
+          "status": "passed"
+        },
+        {
+          "fullName": "text helpers can include the full text as a warm search candidate",
+          "status": "passed"
+        },
+        {
+          "fullName": "text helpers verifies the full candidate when ellipsis breaks monotonic fitting",
+          "status": "passed"
+        },
+        {
+          "fullName": "text helpers does not warm-start text fitting from another spacing mode",
+          "status": "passed"
+        },
+        {
+          "fullName": "shares only identical source and boundary",
+          "status": "passed"
+        },
+        {
+          "fullName": "does not retain oversized inputs and evicts the preceding entry",
+          "status": "passed"
+        },
+        {
+          "fullName": "includes the size boundary and separates successive sources",
+          "status": "passed"
+        },
+        {
+          "fullName": "reuses four interleaved sources and evicts the least recently used preparation",
+          "status": "passed"
+        },
+        {
+          "fullName": "bounds the combined source budget across preparation entries",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "upstreamFile": "packages/vue-clamp/tests/wrap-flow.test.ts",
+      "adaptedFile": "tests/upstream/node/wrap-flow.test.ts",
+      "translation": "Exact upstream test declarations, parameter rows and assertions; imports target the React library engine.",
+      "tests": [
+        {
+          "upstream": {
+            "title": "leaves room for the suffix on the final line",
+            "line": 22,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "leaves room for the suffix on the final line",
+            "line": 23,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "keeps the known fitting prefix before an unavailable item width %s",
+            "line": 30,
+            "parameterized": true,
+            "parameters": "[null, 0, Number.NaN, -1, Number.POSITIVE_INFINITY]",
+            "literalRowCount": 5
+          },
+          "adapted": {
+            "title": "keeps the known fitting prefix before an unavailable item width %s",
+            "line": 31,
+            "parameterized": true,
+            "parameters": "[null, 0, Number.NaN, -1, Number.POSITIVE_INFINITY]",
+            "literalRowCount": 5
+          }
+        },
+        {
+          "upstream": {
+            "title": "moves items after an oversized before box without losing the suffix budget",
+            "line": 40,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "moves items after an oversized before box without losing the suffix budget",
+            "line": 41,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "has no fitting modeled prefix when the suffix is wider than a line",
+            "line": 47,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "has no fitting modeled prefix when the suffix is wider than a line",
+            "line": 48,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "still checks before and after placement when there are no items",
+            "line": 54,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "still checks before and after placement when there are no items",
+            "line": 55,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "retains the existing half-pixel line tolerance",
+            "line": 65,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "retains the existing half-pixel line tolerance",
+            "line": 66,
+            "parameterized": false
+          }
+        },
+        {
+          "upstream": {
+            "title": "keeps the item-only flow result when no after box is present",
+            "line": 76,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "keeps the item-only flow result when no after box is present",
+            "line": 77,
+            "parameterized": false
+          }
+        }
+      ],
+      "runtimeCases": [
+        {
+          "fullName": "static flow prefix with a fixed after box leaves room for the suffix on the final line",
+          "status": "passed"
+        },
+        {
+          "fullName": "static flow prefix with a fixed after box keeps the known fitting prefix before an unavailable item width null",
+          "status": "passed"
+        },
+        {
+          "fullName": "static flow prefix with a fixed after box keeps the known fitting prefix before an unavailable item width 0",
+          "status": "passed"
+        },
+        {
+          "fullName": "static flow prefix with a fixed after box keeps the known fitting prefix before an unavailable item width NaN",
+          "status": "passed"
+        },
+        {
+          "fullName": "static flow prefix with a fixed after box keeps the known fitting prefix before an unavailable item width -1",
+          "status": "passed"
+        },
+        {
+          "fullName": "static flow prefix with a fixed after box keeps the known fitting prefix before an unavailable item width Infinity",
+          "status": "passed"
+        },
+        {
+          "fullName": "static flow prefix with a fixed after box moves items after an oversized before box without losing the suffix budget",
+          "status": "passed"
+        },
+        {
+          "fullName": "static flow prefix with a fixed after box has no fitting modeled prefix when the suffix is wider than a line",
+          "status": "passed"
+        },
+        {
+          "fullName": "static flow prefix with a fixed after box still checks before and after placement when there are no items",
+          "status": "passed"
+        },
+        {
+          "fullName": "static flow prefix with a fixed after box retains the existing half-pixel line tolerance",
+          "status": "passed"
+        },
+        {
+          "fullName": "static flow prefix with a fixed after box keeps the item-only flow result when no after box is present",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "upstreamFile": "packages/vue-clamp/tests/wrap-render-source.test.ts",
+      "adaptedFile": "tests/upstream/node/wrap-render-source.test.ts",
+      "translation": "Vue defineRender render-only source maps to actual React TSX forwardRef render function, exported wrapper, direct root/content object refs, and absence of redundant ref setter functions.",
+      "tests": [
+        {
+          "upstream": {
+            "title": "keeps the SFC render-only and binds it through defineRender",
+            "line": 11,
+            "parameterized": false
+          },
+          "adapted": {
+            "title": "keeps the SFC render-only and binds it through defineRender",
+            "line": 6,
+            "parameterized": false
+          }
+        }
+      ],
+      "runtimeCases": [
+        {
+          "fullName": "WrapClamp render source keeps the SFC render-only and binds it through defineRender",
+          "status": "passed"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "command": "npx vitest run --config vitest.upstream-node.config.ts",
+    "files": 12,
+    "declarations": 107,
+    "executedTests": 111,
+    "passedTests": 111,
+    "failedTests": 0,
+    "pendingTests": 0,
+    "note": "Node execution uses upstream deterministic OffscreenCanvas fixture; browser layout is validated in separate browser suites."
+  }
+}

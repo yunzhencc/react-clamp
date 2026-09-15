@@ -1,0 +1,642 @@
+{
+  "upstream": {
+    "repository": "https://github.com/Justineo/vue-clamp",
+    "revision": "9f93dbcc",
+    "directory": "packages/vue-clamp/tests"
+  },
+  "suiteMappings": [
+    {
+      "original": "packages/vue-clamp/tests/font-delivery.browser.test.ts",
+      "local": "tests/upstream/engine/font-delivery.browser.test.ts",
+      "scope": "entire suite, including every parameterized row",
+      "changes": [
+        "Vitest runner imports",
+        "React library engine/component imports",
+        "Vue test harness mapped to real React adapter when needed",
+        "Vitest 5 browser context imports from vitest/browser"
+      ],
+      "originalSha256": "f84ef8edf6d9419c3d25c87008cfac014cb4feb71e64668895322d25fbd6870d",
+      "testRegistrations": [
+        {
+          "titleExpression": "\"does not repeat initialization for an already fulfilled ready promise\"",
+          "originalLine": 26,
+          "localLine": 26
+        },
+        {
+          "titleExpression": "\"keeps pending readiness even when the font set reports loaded\"",
+          "originalLine": 36,
+          "localLine": 36
+        },
+        {
+          "titleExpression": "\"preserves explicit settled-ready notification without notifying ordinary subscribers\"",
+          "originalLine": 55,
+          "localLine": 55
+        },
+        {
+          "titleExpression": "\"keeps a pending promise that resolves in the subscription task\"",
+          "originalLine": 71,
+          "localLine": 71
+        },
+        {
+          "titleExpression": "\"honors removal, reentrant subscriptions, and errors during readiness\"",
+          "originalLine": 80,
+          "localLine": 80
+        },
+        {
+          "titleExpression": "\"tracks a new ready promise while the native group stays subscribed\"",
+          "originalLine": 104,
+          "localLine": 104
+        },
+        {
+          "titleExpression": "\"keeps real font completion after subscribing before font discovery\"",
+          "originalLine": 121,
+          "localLine": 121
+        },
+        {
+          "titleExpression": "\"shares native font delivery and detaches the final subscriber\"",
+          "originalLine": 163,
+          "localLine": 163
+        },
+        {
+          "titleExpression": "\"does not notify a subscriber cancelled before ready settles\"",
+          "originalLine": 185,
+          "localLine": 185
+        },
+        {
+          "titleExpression": "\"honors unsubscription during native delivery\"",
+          "originalLine": 195,
+          "localLine": 195
+        },
+        {
+          "titleExpression": "\"keeps other native subscribers alive after a callback error\"",
+          "originalLine": 212,
+          "localLine": 212
+        },
+        {
+          "titleExpression": "\"honors cancellation of a later job during the shared frame\"",
+          "originalLine": 229,
+          "localLine": 229
+        },
+        {
+          "titleExpression": "\"keeps other frame jobs alive after a callback error\"",
+          "originalLine": 245,
+          "localLine": 245
+        },
+        {
+          "titleExpression": "\"keeps a new native group intact after repeated old cleanup\"",
+          "originalLine": 258,
+          "localLine": 258
+        },
+        {
+          "titleExpression": "\"does not deliver an in-progress event to a new subscriber\"",
+          "originalLine": 269,
+          "localLine": 269
+        }
+      ]
+    },
+    {
+      "original": "packages/vue-clamp/tests/layout.browser.test.ts",
+      "local": "tests/upstream/engine/layout.browser.test.ts",
+      "scope": "entire suite, including every parameterized row",
+      "changes": [
+        "Vitest runner imports",
+        "React library engine/component imports",
+        "Vue test harness mapped to real React adapter when needed"
+      ],
+      "originalSha256": "57c5fcca5e2a40cd9f00c7d349fa086c95edf9700bda5c846947f47e56a2dff8",
+      "testRegistrations": [
+        {
+          "titleExpression": "\"stops pending font-load callbacks\"",
+          "originalLine": 75,
+          "localLine": 75
+        },
+        {
+          "titleExpression": "\"preserves subpixel border-box signature changes\"",
+          "originalLine": 89,
+          "localLine": 89
+        },
+        {
+          "titleExpression": "\"preserves subpixel border-box width reads\"",
+          "originalLine": 100,
+          "localLine": 100
+        },
+        {
+          "titleExpression": "\"preserves subpixel border-box snapshot widths\"",
+          "originalLine": 106,
+          "localLine": 106
+        },
+        {
+          "titleExpression": "\"reports subpixel ResizeObserver entry changes\"",
+          "originalLine": 117,
+          "localLine": 117
+        },
+        {
+          "titleExpression": "\"compares transformed ResizeObserver entries against visual border boxes\"",
+          "originalLine": 129,
+          "localLine": 129
+        },
+        {
+          "titleExpression": "\"uses visual snapshots for transformed subpixel ResizeObserver entries\"",
+          "originalLine": 137,
+          "localLine": 137
+        },
+        {
+          "titleExpression": "\"can retain logical entry widths for predictive layout\"",
+          "originalLine": 152,
+          "localLine": 152
+        },
+        {
+          "titleExpression": "\"uses entry snapshots for ordinary ResizeObserver entries\"",
+          "originalLine": 161,
+          "localLine": 161
+        },
+        {
+          "titleExpression": "\"preserves subpixel ResizeObserver snapshot widths\"",
+          "originalLine": 172,
+          "localLine": 172
+        },
+        {
+          "titleExpression": "\"still reports transformed ResizeObserver entries when visual size changes\"",
+          "originalLine": 187,
+          "localLine": 187
+        },
+        {
+          "titleExpression": "\"does not cache an untransformed comparison across a later transform change\"",
+          "originalLine": 197,
+          "localLine": 197
+        }
+      ]
+    },
+    {
+      "original": "packages/vue-clamp/tests/preparation.browser.test.ts",
+      "local": "tests/upstream/engine/preparation.browser.test.ts",
+      "scope": "entire suite, including every parameterized row",
+      "changes": [
+        "Vitest runner imports",
+        "React library engine/component imports",
+        "Vue test harness mapped to real React adapter when needed"
+      ],
+      "originalSha256": "45639664ca58e003cf17bbca168f246c285cb1a264b842a91d03608b81126720",
+      "testRegistrations": [
+        {
+          "titleExpression": "\"preserves eager word cuts around emoji and UTF-16 surrogate boundaries\"",
+          "originalLine": 17,
+          "localLine": 17
+        },
+        {
+          "titleExpression": "\"remeasures a previously full-fit line when font metrics and width grow together\"",
+          "originalLine": 25,
+          "localLine": 25
+        },
+        {
+          "titleExpression": "\"preserves serial Rich slot and text settlement while updating measured peers: %j\"",
+          "originalLine": 74,
+          "localLine": 75,
+          "parameterTableExpression": "[{ maxLines: 2 }, { maxHeight: 48 }]"
+        },
+        {
+          "titleExpression": "`${name} segments a full-fit source only when a later shrink needs a cut`",
+          "originalLine": 164,
+          "localLine": 164
+        }
+      ]
+    },
+    {
+      "original": "packages/vue-clamp/tests/rich-backward-patch.browser.test.ts",
+      "local": "tests/upstream/engine/rich-backward-patch.browser.test.ts",
+      "scope": "entire suite, including every parameterized row",
+      "changes": [
+        "Vitest runner imports",
+        "React library engine/component imports",
+        "Vue test harness mapped to real React adapter when needed"
+      ],
+      "originalSha256": "31faa8f32fac0329c95894e12a3016f8e4ec383f5c719f7af1bd969aad2efaf0",
+      "testRegistrations": [
+        {
+          "titleExpression": "\"retains earlier nested text and marker identities with marker %j\"",
+          "originalLine": 7,
+          "localLine": 8,
+          "parameterTableExpression": "[\"…\", \"\", \" […] \"]"
+        }
+      ]
+    },
+    {
+      "original": "packages/vue-clamp/tests/rich-forward-patch.browser.test.ts",
+      "local": "tests/upstream/engine/rich-forward-patch.browser.test.ts",
+      "scope": "entire suite, including every parameterized row",
+      "changes": [
+        "Vitest runner imports",
+        "React library engine/component imports",
+        "Vue test harness mapped to real React adapter when needed"
+      ],
+      "originalSha256": "9014c7f05cbba83b7d980ad4f9c6ea7e9676b396c763a3ee77a4058b96316931",
+      "testRegistrations": [
+        {
+          "titleExpression": "\"restores a trimmed source leaf without consuming the marker %j\"",
+          "originalLine": 7,
+          "localLine": 8,
+          "parameterTableExpression": "[\"…\", \"\", \" […] \"]"
+        }
+      ]
+    },
+    {
+      "original": "packages/vue-clamp/tests/rich-grapheme-projection.browser.test.ts",
+      "local": "tests/upstream/engine/rich-grapheme-projection.browser.test.ts",
+      "scope": "entire suite, including every parameterized row",
+      "changes": [
+        "Vitest runner imports",
+        "React library engine/component imports",
+        "Vue test harness mapped to real React adapter when needed"
+      ],
+      "originalSha256": "9c0a4bc025ae0d3970c22e3f82afc52ed4085dbe686c55b13d3bfe552c8bae59",
+      "testRegistrations": [
+        {
+          "titleExpression": "\"reports a rank that maps back to the measured primary cut\"",
+          "originalLine": 17,
+          "localLine": 17
+        },
+        {
+          "titleExpression": "\"matches fresh layout after width and font changes for %s\"",
+          "originalLine": 49,
+          "localLine": 65,
+          "parameterTableExpression": "[\n    [\n      \"plain\",\n      \"Operational dashboards keep ownership and incident context visible. \".repeat(12),\n      false,\n    ],\n    [\"nested\", \"<b>Family 👩🏽‍💻 <i>dashboard 中文</i></b> context \".repeat(12), false],\n    [\n      \"atomic\",\n      '<b>Lead</b><span style=\"display:inline-block;width:36px;height:16px\">#</span> details '.repeat(\n        12,\n      ),\n      false,\n    ],\n    [\"height\", \"<b>这是混合排版测试。</b><i>Dashboard metrics</i> \".repeat(12), true],\n  ] as const"
+        }
+      ]
+    },
+    {
+      "original": "packages/vue-clamp/tests/text-layout-metric-key.browser.test.ts",
+      "local": "tests/upstream/engine/text-layout-metric-key.browser.test.ts",
+      "scope": "entire suite, including every parameterized row",
+      "changes": [
+        "Vitest runner imports",
+        "React library engine/component imports",
+        "Vue test harness mapped to real React adapter when needed"
+      ],
+      "originalSha256": "7c3267d8ce10cfdf20488ed5df5f1a391f0a87c68b85eefa6b7f351b19ac6352",
+      "testRegistrations": [
+        {
+          "titleExpression": "\"invalidates compact typography keys for changed computed metrics\"",
+          "originalLine": 41,
+          "localLine": 41
+        }
+      ]
+    },
+    {
+      "original": "packages/vue-clamp/tests/text-layout.browser.test.ts",
+      "local": "tests/upstream/engine/text-layout.browser.test.ts",
+      "scope": "entire suite, including every parameterized row",
+      "changes": [
+        "Vitest runner imports",
+        "React library engine/component imports",
+        "Vue test harness mapped to real React adapter when needed"
+      ],
+      "originalSha256": "f8dce617630572c18419a0ac2b16f4d2cb3dd589f4d36877976016d3356a02e1",
+      "testRegistrations": [
+        {
+          "titleExpression": "\"calibrates text line boxes before using simple-height fits\"",
+          "originalLine": 638,
+          "localLine": 638
+        },
+        {
+          "titleExpression": "\"keeps exact text rect-list counting when font boxes can exceed line height\"",
+          "originalLine": 685,
+          "localLine": 685
+        },
+        {
+          "titleExpression": "\"calibrates tight text line boxes after the first exact line count\"",
+          "originalLine": 718,
+          "localLine": 718
+        },
+        {
+          "titleExpression": "\"matches declared text fit classes to observed layout reads\"",
+          "originalLine": 765,
+          "localLine": 765
+        },
+        {
+          "titleExpression": "\"reports content bounds from an existing simple-height fit read\"",
+          "originalLine": 829,
+          "localLine": 829
+        },
+        {
+          "titleExpression": "\"matches the warm rank model when marked text candidates are distinct\"",
+          "originalLine": 869,
+          "localLine": 869
+        },
+        {
+          "titleExpression": "\"uses the failed full line count to seed a cold text search\"",
+          "originalLine": 918,
+          "localLine": 918
+        },
+        {
+          "titleExpression": "\"seeds the grapheme fallback for a cold single-word text search\"",
+          "originalLine": 950,
+          "localLine": 950
+        },
+        {
+          "titleExpression": "\"uses the failed full bounds to seed a cold max-height search\"",
+          "originalLine": 975,
+          "localLine": 975
+        },
+        {
+          "titleExpression": "\"captures text probe mutations during actual layout fitting\"",
+          "originalLine": 1010,
+          "localLine": 1010
+        },
+        {
+          "titleExpression": "\"observes line count as a target-rank slope input\"",
+          "originalLine": 1037,
+          "localLine": 1037
+        },
+        {
+          "titleExpression": "\"observes boundary density as a target-rank slope input\"",
+          "originalLine": 1059,
+          "localLine": 1059
+        },
+        {
+          "titleExpression": "\"bounds target-rank growth from visible capacity and candidate density\"",
+          "originalLine": 1084,
+          "localLine": 1084
+        },
+        {
+          "titleExpression": "\"does not bound text shrink from candidate density alone\"",
+          "originalLine": 1129,
+          "localLine": 1129
+        },
+        {
+          "titleExpression": "\"bounds target-rank movement across held-out combined layouts\"",
+          "originalLine": 1173,
+          "localLine": 1173
+        },
+        {
+          "titleExpression": "\"does not treat text candidate widths as a complete line-break model\"",
+          "originalLine": 1246,
+          "localLine": 1246
+        },
+        {
+          "titleExpression": "\"observes CJK and emoji grapheme width as a target-rank slope input\"",
+          "originalLine": 1293,
+          "localLine": 1293
+        },
+        {
+          "titleExpression": "\"observes affix occupancy as a target-rank input\"",
+          "originalLine": 1317,
+          "localLine": 1317
+        },
+        {
+          "titleExpression": "\"observes max height as a target-rank input\"",
+          "originalLine": 1339,
+          "localLine": 1339
+        },
+        {
+          "titleExpression": "\"keeps calibrated tight line boxes equivalent to exact line counting\"",
+          "originalLine": 1357,
+          "localLine": 1357
+        },
+        {
+          "titleExpression": "\"calibrates line boxes before accepting an exact-limit RTL fit\"",
+          "originalLine": 1398,
+          "localLine": 1398
+        },
+        {
+          "titleExpression": "\"keeps calibrated affix line boxes equivalent to exact line counting\"",
+          "originalLine": 1433,
+          "localLine": 1433
+        },
+        {
+          "titleExpression": "\"verifies affix height overflow before rejecting line-limited content\"",
+          "originalLine": 1481,
+          "localLine": 1481
+        },
+        {
+          "titleExpression": "\"caches exact affix overflow heights after verification\"",
+          "originalLine": 1510,
+          "localLine": 1510
+        },
+        {
+          "titleExpression": "\"uses content bounds for max-height-only fitting\"",
+          "originalLine": 1575,
+          "localLine": 1575
+        },
+        {
+          "titleExpression": "\"keeps cached max-height bounds aligned when candidate height moves the root\"",
+          "originalLine": 1604,
+          "localLine": 1604
+        },
+        {
+          "titleExpression": "\"reuses clientTop while refreshing moved max-height bounds\"",
+          "originalLine": 1646,
+          "localLine": 1646
+        },
+        {
+          "titleExpression": "\"does not reuse layout hints learned under another line limit\"",
+          "originalLine": 1677,
+          "localLine": 1677
+        },
+        {
+          "titleExpression": "\"does not reuse layout hints learned under another line capacity\"",
+          "originalLine": 1683,
+          "localLine": 1683
+        },
+        {
+          "titleExpression": "\"does not reuse layout hints learned under another max height\"",
+          "originalLine": 1689,
+          "localLine": 1689
+        },
+        {
+          "titleExpression": "\"does not reuse layout hints learned under another affix layout\"",
+          "originalLine": 1695,
+          "localLine": 1695
+        },
+        {
+          "titleExpression": "\"does not reuse layout hints learned under another ellipsis\"",
+          "originalLine": 1705,
+          "localLine": 1705
+        },
+        {
+          "titleExpression": "\"does not reuse layout hints learned under another clamp ratio\"",
+          "originalLine": 1711,
+          "localLine": 1711
+        },
+        {
+          "titleExpression": "\"uses fresh full-text geometry ahead of a zero-rank resize hint\"",
+          "originalLine": 1717,
+          "localLine": 1717
+        },
+        {
+          "titleExpression": "\"reuses a stable full-text fit when width grows\"",
+          "originalLine": 1755,
+          "localLine": 1755
+        },
+        {
+          "titleExpression": "\"verifies same-width full text before accepting a clamped warm result\"",
+          "originalLine": 1806,
+          "localLine": 1806
+        },
+        {
+          "titleExpression": "\"warm-starts fallback grapheme search on word-boundary shrinks\"",
+          "originalLine": 1849,
+          "localLine": 1849
+        },
+        {
+          "titleExpression": "\"warm-starts single-word grapheme search after growth\"",
+          "originalLine": 1892,
+          "localLine": 1892
+        },
+        {
+          "titleExpression": "\"estimates line capacity from numeric and px max-height values\"",
+          "originalLine": 1935,
+          "localLine": 1935
+        },
+        {
+          "titleExpression": "\"keeps unresolved CSS max-height lengths out of line-capacity hints\"",
+          "originalLine": 1943,
+          "localLine": 1943
+        }
+      ]
+    },
+    {
+      "original": "packages/vue-clamp/tests/text-metric-invalidation.browser.test.ts",
+      "local": "tests/upstream/engine/text-metric-invalidation.browser.test.ts",
+      "scope": "entire suite, including every parameterized row",
+      "changes": [
+        "Vitest runner imports",
+        "React library engine/component imports",
+        "Vue test harness mapped to real React adapter when needed",
+        "visibleText uses shared React textElement helper instead of Vue-only private body child nesting; assertions unchanged"
+      ],
+      "originalSha256": "cd69114ff606542503ab1e74276aa3a0c373c0b2ca78efdda42f6b011488792a",
+      "testRegistrations": [
+        {
+          "titleExpression": "`${mode} restores a full fit when CSS metrics and width shrink together`",
+          "originalLine": 46,
+          "localLine": 47
+        },
+        {
+          "titleExpression": "\"restores an Inline full fit when stable split affixes shrink independently\"",
+          "originalLine": 88,
+          "localLine": 89
+        }
+      ]
+    },
+    {
+      "original": "packages/vue-clamp/tests/text-prefix-segmentation.browser.test.ts",
+      "local": "tests/upstream/engine/text-prefix-segmentation.browser.test.ts",
+      "scope": "entire suite, including every parameterized row",
+      "changes": [
+        "Vitest runner imports",
+        "React library engine/component imports",
+        "Vue test harness mapped to real React adapter when needed"
+      ],
+      "originalSha256": "8933371fb1c45bdfab6adae1fd637bf43814e622db4a5348260b2eed5eff18f9",
+      "testRegistrations": [
+        {
+          "titleExpression": "\"keeps combining context after %i safe units\"",
+          "originalLine": 38,
+          "localLine": 38,
+          "parameterTableExpression": "[0, 63, 64, 65, 128]"
+        },
+        {
+          "titleExpression": "\"keeps native %s boundaries between long safe runs\"",
+          "originalLine": 42,
+          "localLine": 49,
+          "parameterTableExpression": "[\n    [\"Prepend\", \"\\u0600\"],\n    [\"CRLF\", \"\\r\\n\"],\n    [\"joined admitted pictographs\", \"\\u200d®\"],\n    [\"joined emoji\", \"\\u200d👩🏽‍💻\"],\n    [\"Indic conjunct\", \"क्‍ष\"],\n    [\"private-use characters\", \"\\uf860a\\uf865\"],\n  ]"
+        },
+        {
+          "titleExpression": "\"preserves boundaries when only a later safe run is long\"",
+          "originalLine": 54,
+          "localLine": 54
+        },
+        {
+          "titleExpression": "\"preserves empty and entirely admitted sources\"",
+          "originalLine": 58,
+          "localLine": 58
+        }
+      ]
+    },
+    {
+      "original": "packages/vue-clamp/tests/text-prefull-anchor.browser.test.ts",
+      "local": "tests/upstream/engine/text-prefull-anchor.browser.test.ts",
+      "scope": "entire suite, including every parameterized row",
+      "changes": [
+        "Vitest runner imports",
+        "React library engine/component imports",
+        "Vue test harness mapped to real React adapter when needed"
+      ],
+      "originalSha256": "7111f2cdd1e03f17dc0d3eed01309f9b6946557a88730dc5795fc0259e9f8613",
+      "testRegistrations": [
+        {
+          "titleExpression": "\"reads the displayed Line candidate before full source and does not measure it twice\"",
+          "originalLine": 37,
+          "localLine": 37
+        },
+        {
+          "titleExpression": "\"checks bare full text after a rejected anchor and refreshes its moved height bounds\"",
+          "originalLine": 62,
+          "localLine": 62
+        },
+        {
+          "titleExpression": "\"takes the same pre-full observation through an Inline component resize\"",
+          "originalLine": 98,
+          "localLine": 98
+        }
+      ]
+    }
+  ],
+  "supportMappings": [
+    {
+      "original": "packages/vue-clamp/tests/search-model.ts",
+      "local": "tests/upstream/engine/search-model.ts"
+    },
+    {
+      "original": "packages/vue-clamp/tests/fixtures/narrow.ttf",
+      "local": "tests/upstream/engine/fixtures/narrow.ttf"
+    },
+    {
+      "original": "packages/vue-clamp/src/font-frame.ts",
+      "local": "src/engine/font-frame.ts"
+    },
+    {
+      "original": "packages/vue-clamp/src/rich-line/preparation.ts",
+      "local": "src/engine/rich-preparation.ts",
+      "changes": "Bounded shared cache unchanged except module imports and attribution"
+    },
+    {
+      "original": "packages/vue-clamp/src/rich-line/RichLineClamp.vue",
+      "local": "src/engine/rich-measurement.ts",
+      "changes": "React-owned per-instance measurement helper: deferred preparation, hidden probe with public data-part selectors, source-safety fallback, persistent structural patch cursors"
+    }
+  ],
+  "assertions": "Original assertions and parameter tables preserved. Upstream WebKit-only conditional native-font skip retained; Chromium runs do not take it.",
+  "validation": {
+    "pureEngineMatrix": {
+      "browsers": [
+        "chromium",
+        "firefox",
+        "webkit"
+      ],
+      "suites": 18,
+      "passed": 216,
+      "failed": 0,
+      "skipped": 0
+    },
+    "nativeFontDelivery": {
+      "chromium": {
+        "passed": 15,
+        "failed": 0,
+        "skipped": 0
+      },
+      "webkit": {
+        "passed": 14,
+        "failed": 0,
+        "skipped": 1,
+        "reason": "Upstream conditional: native WebKit loadingdone omitted despite loaded font and changed rendered metrics; reproduced outside Vitest"
+      }
+    },
+    "chromiumEngineAfterRichIntegration": {
+      "passed": 105,
+      "failed": 1,
+      "skipped": 0,
+      "remaining": "Inline pre-full observation ordering owned by text integration"
+    }
+  }
+}
