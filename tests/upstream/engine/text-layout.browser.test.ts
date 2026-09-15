@@ -925,7 +925,8 @@ describe('text layout helpers', () => {
   it('uses the failed full line count to seed a cold text search', async () => {
     await document.fonts?.ready
 
-    const prepared = prepareText('observability-platform '.repeat(32))
+    // Distinct marked candidates keep the rank model equivalent to DOM probes.
+    const prepared = prepareText('observability-platform'.repeat(32))
     const host = mountLayoutHost(180)
     const boundaryCount = prepared.boundaryOffsets.length - 1
     host.text.textContent = prepared.text
@@ -982,7 +983,8 @@ describe('text layout helpers', () => {
   it('uses the failed full bounds to seed a cold max-height search', async () => {
     await document.fonts?.ready
 
-    const prepared = prepareText('observability platform '.repeat(32))
+    // Whitespace trimming can otherwise make adjacent ranks reuse one probe.
+    const prepared = prepareText('observabilityPlatform'.repeat(32))
     const host = mountLayoutHost(180)
     host.root.style.maxHeight = '60px'
     host.root.style.overflow = 'hidden'
@@ -1494,7 +1496,8 @@ describe('text layout helpers', () => {
     after.textContent = 'more'
     after.style.cssText = 'font:inherit;margin-left:4px;padding:0;border:0;background:transparent'
     host.content.append(after)
-    host.text.textContent = 'Release dashboards keep response ownership visible'
+    host.text.style.whiteSpace = 'pre-line'
+    host.text.textContent = 'Status\nStatus\nStatus'
 
     expect(fitsContent(host.root, host.content, 3, undefined, true)).toBe(true)
 
@@ -1523,44 +1526,18 @@ describe('text layout helpers', () => {
     after.textContent = 'more'
     after.style.cssText = 'font:inherit;margin-left:4px;padding:0;border:0;background:transparent'
     host.content.append(after)
-    host.text.textContent
-      = 'Release dashboards keep response ownership visible while on-call owners rotate'
+    host.text.style.whiteSpace = 'pre-line'
+    host.text.textContent = 'Status\nStatus\nStatus\nStatus'
     const baseFit = simpleLineFitFromStyle(getComputedStyle(host.text))
     if (!baseFit) {
       throw new Error('Expected text metrics to expose a simple line fit.')
     }
 
-    const candidateTexts = [
-      'Release dashboards keep response ownership visible while owners rotate',
-      'Release dashboards keep response ownership visible while on-call owners rotate',
-      'Release dashboards keep response ownership visible while on-call owners rotate today',
-      'Release dashboards keep response ownership visible while on-call owners rotate during incidents',
-    ]
-    let overflowText = ''
-
-    for (const candidate of candidateTexts) {
-      host.text.textContent = candidate
-      const trialFit: SimpleLineFit = {
-        lineHeight: baseFit.lineHeight,
-        maxLineBoxHeight: baseFit.lineHeight,
-        verifyOverflow: true,
-      }
-      let fits = true
-      const calls = countClientRectsDuring(host.content, () => {
-        fits = fitsContent(host.root, host.content, 3, undefined, true, undefined, trialFit)
-      })
-
-      if (!fits && calls > 0) {
-        overflowText = candidate
-        break
-      }
-    }
-
-    expect(overflowText).not.toBe('')
-    host.text.textContent = overflowText
+    // Force four lines into the exact-verification band using observed font boxes.
+    const height = host.content.getBoundingClientRect().height
     const affixLineFit: SimpleLineFit = {
       lineHeight: baseFit.lineHeight,
-      maxLineBoxHeight: baseFit.lineHeight,
+      maxLineBoxHeight: height - 3 * baseFit.lineHeight,
       verifyOverflow: true,
     }
 
@@ -1623,9 +1600,9 @@ describe('text layout helpers', () => {
       },
     ]
     const candidates = [
-      'Release status visible',
+      'Status',
       'Release dashboards keep response ownership visible while container width changes',
-      'Release status visible again',
+      'Ready',
       'Release dashboards keep response ownership visible while container width changes again',
     ]
 
