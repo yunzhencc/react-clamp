@@ -21,8 +21,7 @@ const root = hydrateRoot(
           <WrapClamp maxLines={2} gap={8}>
             {Array.from({ length: 8 }, (_, i) => (
               <button key={i} style={{ width: 64, height: 24, padding: 0 }}>
-                Item
-                {' '}
+                {'Item '}
                 {i}
               </button>
             ))}
