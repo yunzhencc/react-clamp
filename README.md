@@ -2,7 +2,7 @@
 
 React 18 / 19 的文本与条目折叠组件。原生 CSS 优先，需要精确截断位置或行内操作时按浏览器真实布局测量。支持中文、英文、Emoji 与组合字符。根入口不加载预测引擎；`react-clamp/pretext` 入口使用 `@chenglou/pretext`。
 
-第三方代码的来源及 MIT 许可见 [第三方声明](./THIRD_PARTY_NOTICES.md)。
+第三方代码的来源及 MIT 许可见 [第三方声明](#third-party-notices)。
 
 当前为本地首版，`react-clamp` 是临时包名，`private: true` 防止误发布。正式包名确认后再发布。当前输出为 ESM。
 
@@ -245,3 +245,29 @@ CI 配置 React 18/19 矩阵；实际结果以 Actions 记录为准。WebKit 测
 ## License
 
 MIT
+
+### Third-party notices
+
+The framework-independent algorithms in src/engine, the corresponding upstream test suites in tests/upstream, and adapted benchmark/measurement tools in scripts are adapted from [vue-clamp](https://github.com/Justineo/vue-clamp), version 1.7.1, commit 9f93dbcc31f60b02dc34fbd6a9da9bf90edc6d84. Imports and React integration differ; the original license follows.
+
+MIT License
+
+Copyright (c) 2018-present GU Yiling
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
