@@ -7,7 +7,7 @@
     "Vue createApp is replaced by the React-only fixture mount adapter.",
     "The real exported demo/App.tsx is imported instead of website App.vue.",
     "Installation snippets use react-clamp and JSX prop syntax.",
-    "All 21 test bodies retain every upstream assertion and interaction."
+    "All 21 test bodies retain the interactions and assertions; the default text assertion follows the framework-neutral demo copy."
   ],
   "cases": [
     {

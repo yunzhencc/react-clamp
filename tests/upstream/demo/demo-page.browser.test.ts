@@ -801,7 +801,7 @@ describe("Website demo page", () => {
     await mountedPage.container.ownerDocument.fonts?.ready;
 
     const input = lineTextInput(mountedPage.container);
-    expect(input.value).toContain("Vue (pronounced");
+    expect(input.value).toContain("Readable interfaces");
     expect(
       lineTextPresetButtons(mountedPage.container).map((button) => button.dataset.lineTextPreset),
     ).toEqual(["english", "chinese", "arabic", "mixed", "emoji"]);

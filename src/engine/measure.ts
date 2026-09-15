@@ -1,4 +1,3 @@
-// Adapted from vue-clamp 1.7.1, MIT. See THIRD_PARTY_NOTICES.md.
 import { hasMeasuredPeers, isContentIndependentWidth } from "./layout.js";
 const queuePostFlushCb = (callback: () => void) => queueMicrotask(callback);
 

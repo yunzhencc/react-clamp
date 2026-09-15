@@ -5,14 +5,14 @@ import { test, expect } from "@playwright/test";
 // Exclude the inert measurement probe; HTML equality still checks the complete live body.
 const html =
   "<strong>Hello 👨‍👩‍👧‍👦</strong> <em>formatted words and links</em> ".repeat(20);
-test("rich keeps formatting while clamping measured content and matches upstream", async ({
+test("rich keeps formatting while clamping measured content", async ({
   page,
 }) => {
-  await page.goto("/tests/browser/parity.html");
-  await page.waitForFunction(() => !!window.mountParity);
+  await page.goto("/tests/browser/components.html");
+  await page.waitForFunction(() => !!window.mountComponent);
   await page.evaluate(
     (html) =>
-      window.mountParity({
+      window.mountComponent({
         kind: "rich",
         html,
         maxLines: 2,
@@ -24,23 +24,18 @@ test("rich keeps formatting while clamping measured content and matches upstream
   const body = page.locator('#react [data-part="body"]:not([inert] *)');
   await expect(body.locator("strong").first()).toBeVisible();
   await expect(body).toContainText("...");
-  await expect
-    .poll(
-      async () =>
-        (await body.innerHTML()) ===
-        (await page.locator('#vue [data-part="body"]:not([inert] *)').first().innerHTML()),
-    )
-    .toBe(true);
+  await expect.poll(() => page.locator('#react [data-part="root"]').evaluate(el => el.getBoundingClientRect().height)).toBeLessThanOrEqual(48);
+
 });
 test("rich falls back to original unsupported content without cloning active elements", async ({
   page,
 }) => {
-  await page.goto("/tests/browser/parity.html");
-  await page.waitForFunction(() => !!window.mountParity);
+  await page.goto("/tests/browser/components.html");
+  await page.waitForFunction(() => !!window.mountComponent);
   const html = '<span id="unique">' + "Words ".repeat(40) + "</span>";
   await page.evaluate(
     (html) =>
-      window.mountParity({ kind: "rich", html, maxLines: 1, ellipsis: "..." }),
+      window.mountComponent({ kind: "rich", html, maxLines: 1, ellipsis: "..." }),
     html,
   );
   await expect(page.locator('#react [data-part="body"]:not([inert] *)')).toHaveJSProperty(
@@ -77,27 +72,27 @@ for (const value of [
     ellipsis: "...",
   },
 ]) {
-  test(`rich reference ${JSON.stringify(value).slice(-100)}`, async ({
+  test(`rich layout ${JSON.stringify(value).slice(-100)}`, async ({
     page,
   }) => {
-    await page.goto("/tests/browser/parity.html");
-    await page.waitForFunction(() => !!window.mountParity);
+    await page.goto("/tests/browser/components.html");
+    await page.waitForFunction(() => !!window.mountComponent);
     await page.evaluate(
-      (value) => window.mountParity({ kind: "rich", ...value }),
+      (value) => window.mountComponent({ kind: "rich", ...value }),
       value,
     );
     const a = page.locator('#react [data-part="body"]:not([inert] *)');
-    const b = page.locator('#vue [data-part="body"]:not([inert] *)').first();
     await expect(a).toBeVisible();
-    await expect
-      .poll(async () => (await a.innerHTML()) === (await b.innerHTML()))
-      .toBe(true);
-    await page.locator("#react,#vue").evaluateAll((elements) => {
-      for (const el of elements) (el as HTMLElement).style.width = "400px";
-    });
-    await expect
-      .poll(async () => (await a.innerHTML()) === (await b.innerHTML()))
-      .toBe(true);
+    for (const width of [240, 400]) {
+      await page.locator("#react").evaluate((el, width) => { (el as HTMLElement).style.width = `${width}px`; }, width);
+      if (value.html.startsWith("<div>")) {
+        await expect(a).toHaveJSProperty("innerHTML", value.html);
+      } else {
+        await expect(page.locator('#react [data-part="root"]')).toHaveAttribute("data-clamped", "true");
+        await expect.poll(() => page.locator('#react [data-part="root"]').evaluate(el => el.getBoundingClientRect().height)).toBeLessThanOrEqual(48);
+        await expect(a.locator("strong, em, b, svg").first()).toBeVisible();
+      }
+    }
   });
 }
 

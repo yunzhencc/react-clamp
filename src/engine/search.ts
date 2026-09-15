@@ -1,4 +1,3 @@
-// Adapted from vue-clamp 1.7.1 (9f93dbc), MIT, copyright GU Yiling. See THIRD_PARTY_NOTICES.md.
 // Two default local expansion steps capture normal resize deltas while bounding
 // the penalty when a previous answer is far from the new fit boundary.
 export const defaultWarmExpansionLimit = 2;

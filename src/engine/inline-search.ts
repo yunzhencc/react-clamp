@@ -1,4 +1,3 @@
-// Adapted from vue-clamp 1.7.1 InlineClamp measured search; MIT.
 import { isContentIndependentWidth, textLayoutMetricKey } from "./layout.js";
 import { warmSearchLocalCoverage } from "./search.js";
 import { canSkipFullTextFit, estimateTextRankFromFull, shouldRecheckFullTextFit, fallbackSearchPrepared,

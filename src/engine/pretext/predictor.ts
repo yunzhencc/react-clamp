@@ -1,4 +1,3 @@
-// Adapted from vue-clamp 1.7.1, MIT, copyright GU Yiling. See THIRD_PARTY_NOTICES.md.
 import { clearCache } from "@chenglou/pretext";
 import { clampPreparedLine, prepareLineClamp } from "./clamp.js";
 

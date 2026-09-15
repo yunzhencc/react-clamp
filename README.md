@@ -2,7 +2,7 @@
 
 React 18 / 19 的文本与条目折叠组件。原生 CSS 优先，需要精确截断位置或行内操作时按浏览器真实布局测量。支持中文、英文、Emoji 与组合字符。根入口不加载预测引擎；`react-clamp/pretext` 入口使用 `@chenglou/pretext`。
 
-React 组件与生命周期为原生实现；测量、结构化富文本和预测准备算法改编自 [vue-clamp 1.7.1](https://github.com/Justineo/vue-clamp)，上游代码采用 MIT 许可，详见 [第三方声明](./THIRD_PARTY_NOTICES.md)。
+第三方代码的来源及 MIT 许可见 [第三方声明](./THIRD_PARTY_NOTICES.md)。
 
 当前为本地首版，`react-clamp` 是临时包名，`private: true` 防止误发布。正式包名确认后再发布。当前输出为 ESM。
 
@@ -20,9 +20,9 @@ pnpm run test:upstream:verify
 pnpm run build:demo
 ```
 
-`pnpm lint` 检查代码，`pnpm check:package` 检查发布产物。贡献流程与版本管理见 [CONTRIBUTING.md](./CONTRIBUTING.md)，工程配置对照及验证边界见 [工程化验证](./docs/engineering-validation.md)。
+`pnpm lint` 检查代码，`pnpm check:package` 检查发布产物。贡献流程与版本管理见 [CONTRIBUTING.md](./CONTRIBUTING.md)。
 
-`pnpm run build` 使用 tsdown 生成 `dist/`，包括 ESM、source map 和 TypeScript 声明；`pnpm pack` 生成本地安装包。示例站输出到 `demo-dist/`。Vue 和 vue-clamp 仅供开发时的差异测试，不进入发布库的运行时依赖。
+`pnpm run build` 使用 tsdown 生成 `dist/`，包括 ESM、source map 和 TypeScript 声明；`pnpm pack` 生成本地安装包。示例站输出到 `demo-dist/`。示例与测试均运行 React 组件。
 
 ## 多行文本
 
@@ -230,17 +230,17 @@ import { LineClamp } from "react-clamp/pretext";
 - WrapClamp 的 gap 默认改为 0；需要旧间距请传 `gap={8}`。
 - InlineClamp 的前后缀选择器由 before/after 改为 start/end；WrapClamp 的 more 选择器改为 after。
 - 增加 CSS 高度、数据列表、富文本和预测入口；便捷 children/more API 保留。
-- 与上游一致，location 超范围数字限制到 0–1；高度数字转换为 CSS px，非法 CSS 高度由浏览器忽略，不再抛出 RangeError。
+- location 超范围数字限制到 0–1；高度数字转换为 CSS px，非法 CSS 高度由浏览器忽略，不再抛出 RangeError。
 
 ## 验证
 
-`pnpm run check` 保留原有构建、类型、单元/SSR 和三浏览器回归检查。`pnpm run test:upstream` 另运行固定上游提交的完整功能与 React 类型契约：39 个功能测试文件、490 个声明位置、536 个展开用例（111 Node + 106 引擎 + 298 组件 + 21 真实示例页面）。浏览器矩阵按各组配置展开，不能混同于独立用例数。
+`pnpm run check` 执行构建、类型、单元/SSR、React 三浏览器回归及包产物检查。
 
-`pnpm run test:upstream:verify` 校验实际运行结果、逐文件映射和运行前后源码指纹；未完成最终冻结验证前，不把单独通过的历史运行合并为当前源码全量通过。当前状态见 [机器验证报告](./docs/upstream-verification.json)，命令与边界见 [完整上游验证](./docs/upstream-validation.md)。CI 已配置 React 18/19 矩阵，远程结果需以实际 Actions 运行记录为准。
+`pnpm run test:upstream` 保留已迁移的 React 功能与类型测试：39 个功能测试文件、536 个展开用例（111 Node + 106 引擎 + 298 组件 + 21 示例页面）。这些测试直接运行 React 组件及测量引擎，无需安装其他 UI 框架。
 
-6 份基准文件另含 9 个测试入口，共 114 项工作负载，因此连同功能测试共有 499 个声明。运行 `pnpm run test:upstream:benchmarks` 保持完整重复次数；`:benchmarks:smoke` 仅用于快速检查，不能替代性能比较。基准不默认加入每次 PR 的功能检查，可通过手动 CI 任务运行。
+`pnpm run test:upstream:benchmarks` 运行 React 基准的 114 项工作负载；`:benchmarks:smoke` 仅用于快速检查。测试来源映射和必要的版权声明保留在仓库中。`test:upstream:verify` 需要独立的测试清单文件，当前仓库缺少该清单，不能作为通过的验证结果。
 
-旧的 `node scripts/benchmark.mjs` 与 [四场景报告](./docs/benchmark.json) 是迁移前快照，不能作为当前实现的性能结论。对齐范围、React 语法差异及验证边界见 [对齐记录](./docs/parity.md)。WebKit 测试不能代替全部 Safari 或 Electron 宿主版本的集成测试。
+CI 配置 React 18/19 矩阵；实际结果以 Actions 记录为准。WebKit 测试不能代替全部 Safari 或 Electron 宿主版本的集成测试。
 
 ## License
 

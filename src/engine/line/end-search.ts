@@ -1,4 +1,3 @@
-// Adapted from vue-clamp 1.7.1, MIT. See THIRD_PARTY_NOTICES.md.
 import { findLargestFittingCount, searchFittingIndex } from "../search.js";
 import { displayTextForKeptCount, searchTextCandidates } from "../text.js";
 

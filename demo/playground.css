@@ -1,12 +1,12 @@
 :root {
   --component-tabs-height: 48px;
 }
-.parity-app {
+.clamp-app {
   max-width: 1120px;
   padding: 0 24px;
   width: 100%;
 }
-.parity-app button,
+.clamp-app button,
 .toggle-btn {
   cursor: pointer;
   border: 1px solid #cbd2bf;
@@ -15,11 +15,11 @@
   background: #fffdf6;
   color: inherit;
 }
-.parity-app button[aria-pressed="true"],
+.clamp-app button[aria-pressed="true"],
 .wrap-tabs-menu-item.active {
   background: #dce8c9;
 }
-.parity-app section {
+.clamp-app section {
   min-width: 0;
 }
 [data-surface-guide-list] {
@@ -257,10 +257,10 @@
   padding: 4px 8px;
 }
 @media (max-width: 600px) {
-  .parity-app {
+  .clamp-app {
     padding: 0 16px;
   }
-  .parity-app .intro {
+  .clamp-app .intro {
     padding: 40px 0;
   }
 }

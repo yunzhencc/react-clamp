@@ -446,7 +446,7 @@ export default function App() {
     hyphens: hyphens ? ("auto" as const) : ("manual" as const),
   };
   return (
-    <main className="parity-app">
+    <main className="clamp-app">
       <header>
         <a className="wordmark" href="#">
           react<span>clamp</span> ↵

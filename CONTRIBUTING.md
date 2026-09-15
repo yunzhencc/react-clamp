@@ -30,7 +30,7 @@ pnpm build:demo
 
 ESLint 使用 Antfu 配置，保留现有格式；固定上游测试与机器证据不参与自动改写，由类型检查、来源映射和浏览器测试验证。`prepare` 在开发仓库安装提交钩子，提交时只检查暂存的 JS/TS 文件；CI 和安装包消费跳过钩子安装。
 
-上游基准使用 `pnpm test:upstream:benchmarks` 独立运行，完整重复测量需要数分钟。修改源码、依赖、锁文件或配置后，旧证据会被指纹检查标为过期；必须重新执行相应组，不能手工把旧报告改成通过。详见 [上游验证](./docs/upstream-validation.md)。
+上游基准使用 `pnpm test:upstream:benchmarks` 独立运行，完整重复测量需要数分钟。修改源码、依赖、锁文件或配置后，旧证据会被指纹检查标为过期；必须重新执行相应组，不能手工把旧报告改成通过。来源映射保留在 `tests/upstream`；汇总校验需另备 `docs/upstream-test-inventory.json` 清单。
 
 ## 版本与发布
 

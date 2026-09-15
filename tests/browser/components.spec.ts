@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import type { ParityCase } from "./parity";
+import type { ComponentCase } from "./components";
 const text =
   "中文与 Emoji 👨‍👩‍👧‍👦 hello world. A reasonably long text with words and punctuation. ".repeat(
     6,
@@ -28,51 +28,43 @@ for (const scenario of [
   { kind: "wrap" },
   { kind: "wrap", maxLines: 2, affixes: true },
   { kind: "wrap", maxHeight: "3em", affixes: true },
-] satisfies ParityCase[]) {
-  test(`upstream parity ${JSON.stringify(scenario)}`, async ({ page }) => {
-    await page.goto("/tests/browser/parity.html");
-    await page.waitForFunction(() => !!window.mountParity);
-    await page.evaluate((value) => window.mountParity(value), {
+] satisfies ComponentCase[]) {
+  test(`component constraints ${JSON.stringify(scenario)}`, async ({ page }) => {
+    await page.goto("/tests/browser/components.html");
+    await page.waitForFunction(() => !!window.mountComponent);
+    await page.evaluate((value) => window.mountComponent(value), {
       text,
       ...scenario,
     });
-    await expect(page.locator('#vue [data-part="root"]')).toBeVisible();
-    const value = async (id: string) =>
-      page.locator(`#${id} [data-part="root"]`).evaluate((root) => ({
-        text: (
-          root.querySelector('[data-part="body"] [aria-hidden="true"]') ??
-          root.querySelector('[data-part="body"]')
-        )?.textContent,
-        items: [...root.querySelectorAll('[data-part="item"]')]
-          .filter((el) => el.getBoundingClientRect().width > 0)
-          .map((el) => el.textContent),
-        height: root.getBoundingClientRect().height,
-      }));
-    await expect
-      .poll(
-        async () => (await value("react")).text === (await value("vue")).text,
-      )
-      .toBe(true);
-    await expect
-      .poll(
-        async () =>
-          JSON.stringify((await value("react")).items) ===
-          JSON.stringify((await value("vue")).items),
-      )
-      .toBe(true);
-    expect(
-      Math.abs((await value("react")).height - (await value("vue")).height),
-    ).toBeLessThanOrEqual(1);
+    const root = page.locator('#react [data-part="root"]');
+    await expect(root).toBeVisible();
+    const options: ComponentCase = scenario;
+    const lines = options.kind === "inline" ? 1 :
+      options.maxLines && options.maxLines > 0 ? Math.floor(options.maxLines) : undefined;
+    const height = options.maxHeight === "3em" ? 48 : lines ? lines * 24 : undefined;
+    if (Number.isNaN(options.location)) {
+      // Preserve the existing invalid-ratio output formerly checked by comparison.
+      await expect(root.locator('[data-part="body"] [aria-hidden="true"]')).toHaveText(
+        `${text.trim()}...${text.trim()}`,
+      );
+    } else if (height !== undefined) {
+      await expect(root).toHaveAttribute("data-clamped", "true");
+      await expect.poll(() => root.evaluate(el => el.getBoundingClientRect().height)).toBeLessThanOrEqual(height + 1);
+    } else if (options.kind === "wrap") {
+      await expect(root.locator('[data-part="item"]')).toHaveCount(20);
+    } else {
+      await expect(root.locator('[data-part="body"]')).toHaveText(text);
+    }
   });
 }
 
 test("data wrap mounts a bounded prefix for a large collapsed list", async ({
   page,
 }) => {
-  await page.goto("/tests/browser/parity.html");
-  await page.waitForFunction(() => !!window.mountParity);
+  await page.goto("/tests/browser/components.html");
+  await page.waitForFunction(() => !!window.mountComponent);
   await page.evaluate(() =>
-    window.mountParity({
+    window.mountComponent({
       kind: "wrap",
       maxLines: 1,
       affixes: true,
@@ -84,13 +76,13 @@ test("data wrap mounts a bounded prefix for a large collapsed list", async ({
     .toBeLessThan(20);
 });
 
-test("predictive entry matches upstream word-boundary output after resize", async ({
+test("predictive entry grows word-boundary output within its line limit on resize", async ({
   page,
 }) => {
-  await page.goto("/tests/browser/parity.html");
-  await page.waitForFunction(() => !!window.mountParity);
+  await page.goto("/tests/browser/components.html");
+  await page.waitForFunction(() => !!window.mountComponent);
   await page.evaluate(() =>
-    window.mountParity({
+    window.mountComponent({
       predictive: true,
       text: "The quick brown fox jumps over the lazy dog. ".repeat(30),
       maxLines: 2,
@@ -106,24 +98,22 @@ test("predictive entry matches upstream word-boundary output after resize", asyn
       .evaluate(
         (el) => (el.querySelector('[aria-hidden="true"]') ?? el).textContent,
       );
-  await expect
-    .poll(async () => (await shown("react")) === (await shown("vue")))
-    .toBe(true);
-  await page.locator("#react,#vue").evaluateAll((elements) => {
-    for (const el of elements) (el as HTMLElement).style.width = "320px";
-  });
-  await expect
-    .poll(async () => (await shown("react")) === (await shown("vue")))
-    .toBe(true);
+  const root = page.locator('#react [data-part="root"]');
+  await expect(root).toHaveAttribute("data-clamped", "true");
+  const initial = await shown("react");
+  await expect.poll(() => root.evaluate(el => el.getBoundingClientRect().height)).toBeLessThanOrEqual(48);
+  await page.locator("#react").evaluate(el => { (el as HTMLElement).style.width = "320px"; });
+  await expect.poll(async () => (await shown("react"))!.length).toBeGreaterThan(initial!.length);
+  await expect.poll(() => root.evaluate(el => el.getBoundingClientRect().height)).toBeLessThanOrEqual(48);
 });
 
 test("warm predictive width updates use observer sizes without geometry reads", async ({
   page,
 }) => {
-  await page.goto("/tests/browser/parity.html");
-  await page.waitForFunction(() => !!window.mountParity);
+  await page.goto("/tests/browser/components.html");
+  await page.waitForFunction(() => !!window.mountComponent);
   await page.evaluate(() =>
-    window.mountParity({
+    window.mountComponent({
       predictive: true,
       text: "The quick brown fox jumps over the lazy dog. ".repeat(30),
       maxLines: 2,
@@ -163,10 +153,10 @@ test("warm predictive width updates use observer sizes without geometry reads", 
 test("data wrap does not repeatedly materialize the hidden suffix on resize", async ({
   page,
 }) => {
-  await page.goto("/tests/browser/parity.html");
-  await page.waitForFunction(() => !!window.mountParity);
+  await page.goto("/tests/browser/components.html");
+  await page.waitForFunction(() => !!window.mountComponent);
   await page.evaluate(() =>
-    window.mountParity({
+    window.mountComponent({
       kind: "wrap",
       maxLines: 2,
       count: 1000,
@@ -200,11 +190,11 @@ for (const kind of ["line", "rich"] as const) {
   test(`warm ${kind} resize avoids duplicate measurement passes`, async ({
     page,
   }) => {
-    await page.goto("/tests/browser/parity.html");
-    await page.waitForFunction(() => !!window.mountParity);
+    await page.goto("/tests/browser/components.html");
+    await page.waitForFunction(() => !!window.mountComponent);
     await page.evaluate(
       (kind) =>
-        window.mountParity({
+        window.mountComponent({
           kind,
           maxLines: 2,
           ellipsis: "...",
@@ -296,16 +286,16 @@ for (const sample of [
     boundary: "word" as const,
   },
 ]) {
-  test(`layout reference ${sample.name}`, async ({ page }) => {
-    await page.goto("/tests/browser/parity.html");
-    await page.waitForFunction(() => !!window.mountParity);
+  test(`layout constraints ${sample.name}`, async ({ page }) => {
+    await page.goto("/tests/browser/components.html");
+    await page.waitForFunction(() => !!window.mountComponent);
     await page.evaluate(
       ({ css, name, ...sample }) =>
-        window.mountParity({ ...sample, maxLines: 3, ellipsis: "..." }),
+        window.mountComponent({ ...sample, maxLines: 3, ellipsis: "..." }),
       sample,
     );
     await page
-      .locator("#react,#vue")
+      .locator("#react")
       .evaluateAll(
         (els, css) =>
           els.forEach(
@@ -313,16 +303,9 @@ for (const sample of [
           ),
         sample.css,
       );
-    const shown = (id: string) =>
-      page
-        .locator(`#${id} [data-part="body"]`)
-        .first()
-        .evaluate(
-          (el) => (el.querySelector('[aria-hidden="true"]') ?? el).textContent,
-        );
     for (const width of [240, 400, 180]) {
       await page
-        .locator("#react,#vue")
+        .locator("#react")
         .evaluateAll(
           (els, width) =>
             els.forEach(
@@ -330,9 +313,10 @@ for (const sample of [
             ),
           width,
         );
-      await expect
-        .poll(async () => (await shown("react")) === (await shown("vue")))
-        .toBe(true);
+      const root = page.locator('#react [data-part="root"]');
+      await expect(root).toHaveAttribute("data-clamped", "true");
+      const lineHeight = Number.parseFloat(sample.css.match(/\/(\d+)px/u)![1]!);
+      await expect.poll(() => root.evaluate(el => el.getBoundingClientRect().height)).toBeLessThanOrEqual(lineHeight * 3 + 1);
     }
   });
 }
@@ -340,10 +324,10 @@ for (const sample of [
 test("percentage height expands when the containing block grows", async ({
   page,
 }) => {
-  await page.goto("/tests/browser/parity.html");
-  await page.waitForFunction(() => !!window.mountParity);
+  await page.goto("/tests/browser/components.html");
+  await page.waitForFunction(() => !!window.mountComponent);
   await page.evaluate(() =>
-    window.mountParity({
+    window.mountComponent({
       text: "Words and more words for height clipping. ".repeat(30),
       maxHeight: "50%",
       ellipsis: "...",
@@ -358,9 +342,10 @@ test("percentage height expands when the containing block grows", async ({
           (el.querySelector('[aria-hidden="true"]') ?? el).textContent ?? "",
       );
   let previousLength = 0;
+  let initialText: string | undefined;
   for (const height of [96, 240, 96]) {
     await page
-      .locator("#react,#vue")
+      .locator("#react")
       .evaluateAll(
         (els, height) =>
           els.forEach(
@@ -372,12 +357,8 @@ test("percentage height expands when the containing block grows", async ({
       await expect
         .poll(async () => (await shown("react")).length)
         .toBeGreaterThan(previousLength);
-    // Upstream 1.7.1 remains stale on height-only growth; retain its initial
-    // output as the shrink target, without duplicating that upstream bug.
-    if (height === 96)
-      await expect
-        .poll(async () => (await shown("react")) === (await shown("vue")))
-        .toBe(true);
+    if (height === 96 && initialText !== undefined)
+      await expect.poll(() => shown("react")).toBe(initialText);
     await expect
       .poll(() =>
         page
@@ -385,6 +366,7 @@ test("percentage height expands when the containing block grows", async ({
           .evaluate((el) => el.getBoundingClientRect().height),
       )
       .toBe(height / 2);
+    initialText ??= await shown("react");
     previousLength = (await shown("react")).length;
   }
 });

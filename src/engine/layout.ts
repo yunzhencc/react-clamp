@@ -1,4 +1,3 @@
-// Adapted from vue-clamp 1.7.1 (9f93dbc), MIT, copyright GU Yiling. See THIRD_PARTY_NOTICES.md.
 import type { ClampLength } from "./types.js";
 
 export const borderBoxObserverOptions: ResizeObserverOptions = { box: "border-box" };
