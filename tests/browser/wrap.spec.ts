@@ -20,9 +20,14 @@ test('wrap keeps whole items and reserves the last row for the exact hidden coun
   await expect(items(page)).toHaveCount(5)
   await expect(page.locator('[data-part="after"]')).toHaveText('+3')
   const box = (await root(page).boundingBox())!
-  expect(box.height).toBeLessThanOrEqual(56.5)
   const more = (await page.locator('[data-part="after"]').boundingBox())!
-  expect(more.y + more.height).toBeLessThanOrEqual(box.y + 56.5)
+  const first = (await items(page).first().boundingBox())!
+  const last = (await items(page).last().boundingBox())!
+  // Native button heights differ across platforms; the limit is two flex rows.
+  const height = first.height + 8 + Math.max(last.height, more.height)
+  expect(box.height).toBeLessThanOrEqual(height + 0.5)
+  expect(more.y).toBeCloseTo(last.y, 1)
+  expect(more.y + more.height).toBeLessThanOrEqual(box.y + height + 0.5)
   await page.getByRole('button', { name: 'Item 0: 0', exact: true }).click()
   await page.getByRole('button', { name: 'Show 3 more items' }).click()
   await expect(items(page)).toHaveCount(8)
