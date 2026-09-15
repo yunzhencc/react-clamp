@@ -70,7 +70,7 @@
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "dependencies": {
-    "@chenglou/pretext": "0.0.8"
+    "@chenglou/pretext": "0.0.9"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^9.5.1",
@@ -100,5 +100,8 @@
   },
   "nano-staged": {
     "*.{js,mjs,ts,tsx}": "eslint --no-warn-ignored --max-warnings=0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

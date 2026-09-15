@@ -1,19 +1,19 @@
-export { LineClamp, InlineClamp, RichLineClamp } from "./Clamp.js";
+export { InlineClamp, LineClamp, RichLineClamp } from './Clamp.js'
 export type {
-  ClampState,
-  ClampHandle,
   ClampContent,
+  ClampHandle,
+  ClampState,
+  InlineClampParts,
+  InlineClampProps,
   LineClampProps,
   RichLineClampProps,
-  InlineClampProps,
-  InlineClampParts,
-} from "./Clamp.js";
-export type { ClampLocation, ClampBoundary } from "./text.js";
-export { WrapClamp } from "./WrapClamp.js";
+} from './Clamp.js'
+export type { ClampLength, ClampTag } from './layout.js'
+export type { ClampBoundary, ClampLocation } from './text.js'
+export { WrapClamp } from './WrapClamp.js'
+
 export type {
+  WrapClampHandle,
   WrapClampProps,
   WrapClampState,
-  WrapClampHandle,
-} from "./WrapClamp.js";
-
-export type { ClampLength, ClampTag } from "./layout.js";
+} from './WrapClamp.js'

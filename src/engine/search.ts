@@ -1,7 +1,7 @@
 // Two default local expansion steps capture normal resize deltas while bounding
 // the penalty when a previous answer is far from the new fit boundary.
-export const defaultWarmExpansionLimit = 2;
-export const richWarmExpansionLimit = defaultWarmExpansionLimit + 1;
+export const defaultWarmExpansionLimit = 2
+export const richWarmExpansionLimit = defaultWarmExpansionLimit + 1
 
 // For monotonic predicates, rejecting an index also rejects every larger index.
 function* binarySearchLastFit(
@@ -9,22 +9,23 @@ function* binarySearchLastFit(
   high: number,
   best = -1,
 ): Generator<number, number, boolean> {
-  let currentLow = low;
-  let currentHigh = high;
-  let currentBest = best;
+  let currentLow = low
+  let currentHigh = high
+  let currentBest = best
 
   while (currentLow <= currentHigh) {
-    const index = Math.floor((currentLow + currentHigh) / 2);
+    const index = Math.floor((currentLow + currentHigh) / 2)
 
     if (yield index) {
-      currentBest = index;
-      currentLow = index + 1;
-    } else {
-      currentHigh = index - 1;
+      currentBest = index
+      currentLow = index + 1
+    }
+    else {
+      currentHigh = index - 1
     }
   }
 
-  return currentBest;
+  return currentBest
 }
 
 function binarySearchLargestFittingCount(
@@ -32,20 +33,21 @@ function binarySearchLargestFittingCount(
   high: number,
   fits: (count: number) => boolean,
 ): number {
-  let floor = low;
-  let ceiling = high;
+  let floor = low
+  let ceiling = high
 
   while (floor < ceiling) {
-    const count = Math.ceil((floor + ceiling) / 2);
+    const count = Math.ceil((floor + ceiling) / 2)
 
     if (fits(count)) {
-      floor = count;
-    } else {
-      ceiling = count - 1;
+      floor = count
+    }
+    else {
+      ceiling = count - 1
     }
   }
 
-  return floor;
+  return floor
 }
 
 export function findLastFittingIndex(
@@ -54,12 +56,12 @@ export function findLastFittingIndex(
   hint?: number | null,
   expansionLimit = defaultWarmExpansionLimit,
 ): number {
-  const search = searchFittingIndex(count, hint, expansionLimit);
-  let step = search.next();
+  const search = searchFittingIndex(count, hint, expansionLimit)
+  let step = search.next()
   while (!step.done) {
-    step = search.next(fits(step.value));
+    step = search.next(fits(step.value))
   }
-  return step.value;
+  return step.value
 }
 
 // The same search can be driven synchronously or suspended between a candidate
@@ -71,79 +73,80 @@ export function* searchFittingIndex(
   monotonic = true,
 ): Generator<number, number, boolean> {
   if (count <= 0) {
-    return -1;
+    return -1
   }
 
-  const maxIndex = count - 1;
+  const maxIndex = count - 1
 
   if (!monotonic) {
     // A rejected cut cannot bound later candidates when shaping can reduce
     // their width. Descending evaluation proves maximality without a lookahead cap.
     for (let index = maxIndex; index >= 0; index -= 1) {
-      if (yield index) return index;
+      if (yield index)
+        return index
     }
-    return -1;
+    return -1
   }
 
   if (hint == null || !Number.isFinite(hint)) {
-    return yield* binarySearchLastFit(0, maxIndex);
+    return yield* binarySearchLastFit(0, maxIndex)
   }
 
-  const start = Math.max(0, Math.min(maxIndex, Math.floor(hint)));
+  const start = Math.max(0, Math.min(maxIndex, Math.floor(hint)))
 
   if (yield start) {
     // Growing from a fitting hint favors the common case where a container gets
     // a little wider and only a few more candidates may now fit.
-    let fit = start;
-    let step = 1;
-    let expansions = 0;
+    let fit = start
+    let step = 1
+    let expansions = 0
 
     while (fit < maxIndex) {
-      const probe = Math.min(maxIndex, fit + step);
+      const probe = Math.min(maxIndex, fit + step)
 
       if (!(yield probe)) {
-        return yield* binarySearchLastFit(fit + 1, probe - 1, fit);
+        return yield* binarySearchLastFit(fit + 1, probe - 1, fit)
       }
 
-      fit = probe;
-      expansions += 1;
+      fit = probe
+      expansions += 1
       if (expansions >= expansionLimit) {
-        return yield* binarySearchLastFit(fit + 1, maxIndex, fit);
+        return yield* binarySearchLastFit(fit + 1, maxIndex, fit)
       }
 
-      step *= 2;
+      step *= 2
     }
 
-    return fit;
+    return fit
   }
 
-  let failed = start;
-  let step = 1;
-  let expansions = 0;
+  let failed = start
+  let step = 1
+  let expansions = 0
 
   while (failed > 0) {
     // Shrinking from a failing hint handles the opposite resize direction
     // without restarting from the middle of the whole candidate set.
-    const probe = Math.max(0, failed - step);
+    const probe = Math.max(0, failed - step)
 
     if (yield probe) {
-      return yield* binarySearchLastFit(probe + 1, failed - 1, probe);
+      return yield* binarySearchLastFit(probe + 1, failed - 1, probe)
     }
 
-    failed = probe;
-    expansions += 1;
+    failed = probe
+    expansions += 1
     if (expansions >= expansionLimit) {
-      return yield* binarySearchLastFit(0, failed - 1);
+      return yield* binarySearchLastFit(0, failed - 1)
     }
 
-    step *= 2;
+    step *= 2
   }
 
-  return -1;
+  return -1
 }
 
 export function warmSearchLocalCoverage(expansionLimit = defaultWarmExpansionLimit): number {
-  return 2 ** expansionLimit - 1;
+  return 2 ** expansionLimit - 1
 }
 
 export function shouldVerifyFullCandidate(
@@ -154,12 +157,12 @@ export function shouldVerifyFullCandidate(
   clampedMaxWidth: number | null | undefined,
 ): boolean {
   if (!skipFullFit || previousWidth == null || width === previousWidth) {
-    return true;
+    return true
   }
 
   return (
     width > previousWidth && (previousWasFull || clampedMaxWidth == null || width > clampedMaxWidth)
-  );
+  )
 }
 
 export function findLargestFittingCount(
@@ -169,23 +172,23 @@ export function findLargestFittingCount(
   hint?: number | null,
 ): number {
   if (high <= low) {
-    return low;
+    return low
   }
 
   if (hint == null || !Number.isFinite(hint)) {
     // Count searches often mutate DOM in their predicate. Keep the no-hint path
     // on the original ceil-midpoint probe order so those reads do not regress.
-    return binarySearchLargestFittingCount(low, high, fits);
+    return binarySearchLargestFittingCount(low, high, fits)
   }
 
-  const offsetHint = Math.floor(hint) - low;
+  const offsetHint = Math.floor(hint) - low
   const fittingOffset = findLastFittingIndex(
     high - low + 1,
-    (offset) => fits(low + offset),
+    offset => fits(low + offset),
     offsetHint,
-  );
+  )
 
   // Count searches are called with a known-safe lower bound. Preserve that
   // fallback if an unusual predicate rejects every probed candidate.
-  return fittingOffset < 0 ? low : low + fittingOffset;
+  return fittingOffset < 0 ? low : low + fittingOffset
 }

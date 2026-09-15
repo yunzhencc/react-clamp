@@ -1,29 +1,29 @@
-import { clearCache } from "@chenglou/pretext";
-import { clampPreparedLine, prepareLineClamp } from "./clamp.js";
+import type { PrepareOptions } from '@chenglou/pretext'
+import type { LineClampPredictor } from '../predictor.js'
 
-import type { PrepareOptions } from "@chenglou/pretext";
-import type { LineClampPredictor } from "../predictor.js";
+import { clearCache } from '@chenglou/pretext'
+import { clampPreparedLine, prepareLineClamp } from './clamp.js'
 
-type Typography = {
-  readonly font: string;
-  readonly options: PrepareOptions;
-};
+interface Typography {
+  readonly font: string
+  readonly options: PrepareOptions
+}
 
-type PreparedCache = {
-  readonly ellipsis: string;
-  readonly prepared: ReturnType<typeof prepareLineClamp>;
-  readonly text: string;
-  readonly typography: Typography;
-};
+interface PreparedCache {
+  readonly ellipsis: string
+  readonly prepared: ReturnType<typeof prepareLineClamp>
+  readonly text: string
+  readonly typography: Typography
+}
 
-const maxSharedPreparationLength = 8192;
-let fontMetricsDirty = false;
+const maxSharedPreparationLength = 8192
+let fontMetricsDirty = false
 // One width-independent preparation can serve adjacent identical instances.
 // Bound retained input size and never cache a rendered clamp result.
-let lastPreparation: PreparedCache | null = null;
+let lastPreparation: PreparedCache | null = null
 
 function fallbackFont(style: CSSStyleDeclaration): string {
-  const variant = style.fontVariantCaps === "small-caps" ? "small-caps" : "normal";
+  const variant = style.fontVariantCaps === 'small-caps' ? 'small-caps' : 'normal'
   return [
     style.fontStyle,
     variant,
@@ -31,82 +31,83 @@ function fallbackFont(style: CSSStyleDeclaration): string {
     style.fontStretch,
     style.fontSize,
     style.fontFamily,
-  ].join(" ");
+  ].join(' ')
 }
 
 function readTypography(element: HTMLElement): Typography {
-  const style = getComputedStyle(element);
-  const letterSpacing = Number.parseFloat(style.letterSpacing);
+  const style = getComputedStyle(element)
+  const letterSpacing = Number.parseFloat(style.letterSpacing)
 
   return {
     font: style.font.trim() || fallbackFont(style),
     options: {
       ...(Number.isFinite(letterSpacing) && letterSpacing !== 0 ? { letterSpacing } : {}),
-      ...(style.whiteSpace === "pre-wrap" ? { whiteSpace: "pre-wrap" as const } : {}),
-      ...(style.wordBreak === "keep-all" ? { wordBreak: "keep-all" as const } : {}),
+      ...(style.whiteSpace === 'pre-wrap' ? { whiteSpace: 'pre-wrap' as const } : {}),
+      ...(style.wordBreak === 'keep-all' ? { wordBreak: 'keep-all' as const } : {}),
     },
-  };
+  }
 }
 
 export function createPretextLineClampPredictor(): LineClampPredictor {
-  let preparedCache: PreparedCache | null = null;
-  let typography: Typography | null = null;
+  let preparedCache: PreparedCache | null = null
+  let typography: Typography | null = null
 
   return {
     invalidate() {
       // All affected instances invalidate before their queued predictions.
       // Clear shared font metrics once when the next prediction needs them.
-      fontMetricsDirty = true;
-      lastPreparation = null;
-      preparedCache = null;
-      typography = null;
+      fontMetricsDirty = true
+      lastPreparation = null
+      preparedCache = null
+      typography = null
     },
     predict(input) {
       if (
-        !Number.isFinite(input.rootWidth) ||
-        !Number.isFinite(input.beforeWidth) ||
-        !Number.isFinite(input.afterWidth)
+        !Number.isFinite(input.rootWidth)
+        || !Number.isFinite(input.beforeWidth)
+        || !Number.isFinite(input.afterWidth)
       ) {
-        return null;
+        return null
       }
 
-      typography ??= readTypography(input.textElement);
+      typography ??= readTypography(input.textElement)
       if (
-        preparedCache === null ||
-        preparedCache.text !== input.text ||
-        preparedCache.ellipsis !== input.ellipsis
+        preparedCache === null
+        || preparedCache.text !== input.text
+        || preparedCache.ellipsis !== input.ellipsis
       ) {
         if (fontMetricsDirty) {
-          clearCache();
-          fontMetricsDirty = false;
+          clearCache()
+          fontMetricsDirty = false
         }
-        const shared = lastPreparation;
+        const shared = lastPreparation
         if (
-          shared &&
-          shared.text === input.text &&
-          shared.ellipsis === input.ellipsis &&
-          shared.typography.font === typography.font &&
-          shared.typography.options.letterSpacing === typography.options.letterSpacing &&
-          shared.typography.options.whiteSpace === typography.options.whiteSpace &&
-          shared.typography.options.wordBreak === typography.options.wordBreak
+          shared
+          && shared.text === input.text
+          && shared.ellipsis === input.ellipsis
+          && shared.typography.font === typography.font
+          && shared.typography.options.letterSpacing === typography.options.letterSpacing
+          && shared.typography.options.whiteSpace === typography.options.whiteSpace
+          && shared.typography.options.wordBreak === typography.options.wordBreak
         ) {
-          preparedCache = shared;
-        } else {
+          preparedCache = shared
+        }
+        else {
           preparedCache = {
             ellipsis: input.ellipsis,
             prepared: prepareLineClamp(input.text, typography.font, {
               ...typography.options,
-              boundary: "word",
+              boundary: 'word',
               ellipsis: input.ellipsis,
             }),
             text: input.text,
             typography,
-          };
-          lastPreparation =
-            input.text.length + input.ellipsis.length + typography.font.length <=
-            maxSharedPreparationLength
+          }
+          lastPreparation
+            = input.text.length + input.ellipsis.length + typography.font.length
+              <= maxSharedPreparationLength
               ? preparedCache
-              : null;
+              : null
         }
       }
 
@@ -116,18 +117,18 @@ export function createPretextLineClampPredictor(): LineClampPredictor {
         input.lineLimit,
         input.beforeWidth,
         input.afterWidth,
-      );
+      )
     },
     supports({ boundary, ellipsis, lineLimit, locationRatio, maxHeight }) {
       // The line walker stops at normal wrap points; it does not fill the
       // last line with a partial word. Grapheme clamping stays browser-measured.
       return (
-        boundary === "word" &&
-        maxHeight === undefined &&
-        lineLimit !== undefined &&
-        locationRatio === 1 &&
-        !/[\n\r\f]/u.test(ellipsis)
-      );
+        boundary === 'word'
+        && maxHeight === undefined
+        && lineLimit !== undefined
+        && locationRatio === 1
+        && !/[\n\r\f]/u.test(ellipsis)
+      )
     },
-  };
+  }
 }
